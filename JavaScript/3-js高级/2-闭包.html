@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function outer() {
+        //     const a = 1
+        //     function f() {
+        //         console.log(a)
+        //     }
+        //     return f
+        // }
+
+        // const fn = outer()
+        // fn()
+
+        // 闭包的应用
+
+        // 普通形式
+        // let i = 0
+        // function fn() {
+        //     i++
+        //     console.log(i)
+        // }
+        // 因为i是全局变量 容易被修改
+
+        // 闭包
+        function count() {
+            let i = 0
+            function fn() {
+                i++
+                console.log(i)
+            }
+            return fn
+        }
+        // count() 断点
+        const fun = count()
+        // fun()
+        // i = 1
+        // while (i != 5) {
+        //     fun()
+        //     i++
+        // }
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

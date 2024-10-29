@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>表格是来显示数据的,列表是来布局的</h1>
+    <table> 
+        <tr><td>姓名</td> <td>性别</td> <td>年龄</td></tr>
+        <tr><td>张学友</td> <td>男</td> <td>50</td></tr> 
+        <tr><td>郭富城</td> <td>男</td> <td>51</td></tr> 
+        <tr><td>黎明</td> <td>男</td> <td>56</td></tr>  
+    </table>
+    <!--表头单元格: 位置会居中，字体加粗-->
+    <table>
+        <tr> <th>姓名</th> <th>性别</th> <th>年龄</th> </tr>
+        <tr> <th>小王</th> <th>女</th> <th>45</th> </tr>
+    </table>
+    <!--表格属性:要写到表格table中去--><!--cellpadding是文字与边框的距离，cellspacing是边框td与tr的距离-->
+    <table align="center" border="1" cellpadding="0px" cellspacing="0px" width="500" >  
+        <tr><td>姓名</td> <td>性别</td> <td>年龄</td></tr>
+        <tr><td>张学友</td> <td>男</td> <td>50</td></tr> 
+        <tr><td>郭富城</td> <td>男</td> <td>51</td></tr> 
+        <tr><td>黎明</td> <td>男</td> <td>56</td></tr>  
+    </table>
+
+    案例：
+    <table align="center" border="1" cellpadding="0" cellspacing="0" width="500" height="100">
+        <thead>
+            <tr>
+                <th>排名</th>
+                <th>关键词</th>
+                <th>趋势</th>
+                <th>今日搜索</th>
+                <th>最近七日</th>
+                <th>相关链接</th>
+            </tr>            
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>鬼吹灯</td>
+                <td><img src="熊.png" width="100px"></td>
+                <td>345</td>
+                <td>123</td>
+                <td><a href="#">贴吧</a> <a href="#">图片</a> <a href="#">百科</a></td>          
+            </tr>   
+            <tr>
+                <td>2</td>
+                <td>哈利波特</td>
+                <td><img src="熊.png" width="100px"></td>
+                <td>666</td>
+                <td>213</td>
+                <td><a href="#">贴吧</a> <a href="#">图片</a> <a href="#">百科</a></td>          
+            </tr>          
+        </tbody>     
+    </table>
+    .....
+    合并单元格 跨行:rowspan以上边单元格为结果,删除多余格 跨列:colspan以左边单元格为结果,删除多余格
+   
+    <table align="center" border="1" cellpadding="0px" cellspacing="0px" width="500" >  
+        <tr> <!--合并性别和年龄 2个单元格-->
+            <td>姓名</td>
+            <td colspan="2">性别</td> 
+            <!-- <td>年龄</td> -->
+        </tr>
+        <tr><!--合并张学友和郭富城-->
+            <td rowspan="2">张学友</td> 
+            <td>男</td>
+            <td>50</td>
+        </tr> 
+        <tr>
+            <!-- <td>郭富城</td>  -->
+            <td>男</td>
+            <td>51</td>
+            </tr> 
+        <tr>
+            <td>黎明</td>
+            <td>男</td> 
+            <td>56</td>
+        </tr>  
+    </table>
+</body>
+</html>

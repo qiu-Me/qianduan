@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        作用域
+            局部作用域
+                规定变量被访问的范围：函数作用域、块作用域（如for循环里）
+                let、const声明的会产生块作用域，var不会产生
+            全局作用域
+                script里面
+            作用域链
+                作用域链本质上是底层的变量查找机制：函数执行时，优先查找当前函数作用域中查找变量
+                如果当前作用域找不到则依次逐级查找父级作用域知道全局作用域
+            js垃圾回收机制
+                生命周期：
+                    内存分配
+                    内存使用
+                    内存回收
+                说明：局部变量值会自动回收
+                内存泄漏：分配的内存没有释放或无法释放叫做内存泄漏
+                栈：操作系统自动分配释放
+                堆：由程序员手动分配手动释放，js中程序员如果不释放，垃圾回收机制会回收，复杂数据类型放在堆里面
+                垃圾会搜算法：
+                    引用计数：看对象是否有指向它的引用，没有就回收
+                            跟踪记录引用次数，引用一次就累加 ++，减少一个引用就减1 --，
+                            引用次数为0，释放
+
+                            缺点：嵌套引用（循环引用），两个对象相互引用，垃圾回收器不会回收导致内存泄漏    
+
+                    标记清除法：从根部扫描对象，能够找到就是使用的，找不到就回收
+            闭包
+                内层函数+外层函数变量
+                内层函数使用外层函数变量 都要调用   外部可以访问内部变量
+                可能会产生内存泄漏 所以会用到内存回收机制第二种方法
+                例如：
+                    function outer(){
+                        const a = 1
+                        function f(){
+                            console.log(a)
+                        }
+                        // 不要写小括号
+                        return f
+                    }
+                    // outer() === f ===function f(){}
+                    
+                    const fn = outer()
+                    // 调用函数
+                    fn() //1
+                
+                应用：2-闭包 实现数据的私有
+
+            变量提升
+                1.把所有var声明的变量只提升到 当前作用域 的最前面
+                2.只提升声明,不提升赋值
+                例如:
+                    console.log(num)  //undefined
+                    var num = 10
+                    // 相当于
+                    var num
+                    console.log(num)
+                    num = 10
+
+                暂时死区:
+                运行流程进入作用域创建变量，到变量可以被访问之间的这一段时间，就称之为暂时死区。
+                // 也就是说变量声明到变量使用这一段时间称为暂时死区
+                var,function没有暂时死区,let、const、import、class、typeof等有暂时死区
+
+        函数进阶
+            函数提升
+                1.把所有函数声明提升到 当前作用域 的最前面
+                2.只提升函数声明,不提升函数调用
+                例如:
+                    f() //执行正确
+                    function f(){
+                        console.log('函数提升')
+                    }
+                    // 相当于
+                    function f(){
+                        console.log('函数提升')
+                    }
+                    f()
+                    function f(){
+                        console.log('函数提升')
+                    }
+                函数表达式不存在提升
+                例如:
+                    bar()  //报错
+                    var bar =  function(){
+                        console.log('函数表达式不存在提升')
+                    }
+                    // 相当于
+                    var bar
+                    bar()  
+                    var bar =  function(){
+                        console.log('函数表达式不存在提升')
+                    }
+            函数参数
+                动态函数：不知道有多少个参数时
+                    动态参数
+                        arguments 是伪数组 只存在于 函数里面
+                        例如：
+                            function getSum(){
+                                // console.log(arguments)
+                                let sum = 0
+                                for(let i = 0; i < arguments.length; i++) {
+                                    sum += arguments[i]
+                                }
+                                console.log(sum)
+                            }
+                            getSum(2,3,4)
+                            getSum(2,3,4,5,6,7,8)
+
+                    剩余参数
+                        函数(...真数组) arr是真数组 使用时不需要写‘...’
+                        例如： 
+                            function getSum(a,b...arr) {
+                                console.log(arr) //a=1,b=2 arr=[3,4,5]
+                            }
+                            getSum(1,2)
+                            getSum(1,2,3,4,5)
+
+                        区别于 展开运算符‘...’ 其可存于函数外面
+                            例如:
+                                const arr1 = [1,4,7]
+                                console.log(...arr1)   // ...arr === 1,4,7
+                            作用：    
+                                1.求最大最小值
+                                console.log(Math.max(...arr1)) //7
+
+                                2.合并数组
+                                const arr2 = [3,4,5]
+                                const arr = [...arr1,...arr2] 
+                                console.log(arr)                //[1,4,7,3,4,5]
+                
+            箭头函数
+                        更适用于本来需要匿名的地方           
+                基本语法
+                    以前的函数：
+                        const fn = function(){
+                            console.lof(123)
+                        }
+                    箭头函数：
+                        const fn = () => {
+                            console.log(123)
+                        }
+                        fn() //调用
+
+                        1.只有一个形参时可以省略()
+                            const fn = x => {
+                                console.log(x)
+                            }
+                            fn(1)
+
+                        2.只有一行代码时 可以省略 {}
+                            const fn = x => console.log(x)
+                            fn(1)
+                        
+                        3.只有一行代码可以省略return
+                            原函数：
+                            const fn = x => {
+                                return x + x
+                            }
+                            可以写成
+                            const fn = x => x + x
+
+                            console.log(fn(1))  //2
+                        4.箭头函数可以直接返回一个对象
+                            原函数：
+                                const fn = function(uname) {
+                                    { name: uname }   //创建一个对象 键值对
+                                }
+                            简化：
+                                const fn = (uname) => {
+                                    { name: uname }
+                                }
+                            一行可以省略{} 但是这个对象本来就有{}
+                            如果这样写
+                            const fn = (uname) =>  { name: uname }
+                            那么编译器分不清{}是对象的还是函数的
+                            所以写成 用()括上对象 区分{}是对象的 相当于(先执行)：
+                            const fn = (uname) =>  ({ name: uname })
+
+                            fn('刘德华')
+
+                箭头函数参数
+                    没有arguments动态函数 但有剩余函数...args
+                    1.利用箭头函数求和
+                    const getSum = (...arr) => {
+                        let sum = 0
+                        for(let i = 0; i < arr.length; i++){
+                            sum += arr[i]
+                        }
+                        return sum 
+                    }
+                    console.log(getSum(2,3))
+
+                箭头函数this
+                    1.普通函数：
+                        this指向函数的调用者
+                        对象方法里面的this 此时this指向obj
+                            const obj {
+                                name: 'andy',
+                                sayHi: function() {
+                                    console.log(this)
+                                }
+                            }
+                            obj.sayHi()
+                    
+                    2.箭头函数的this 指向 上一层的作用域
+                    箭头函数本质上没有this 是指向它的上一级
+                    例如：
+                        const fn() = () => {
+                            console.log(this) //window
+                        }
+                        fn()
+
+                    // 对象方法箭头函数 this
+                    const obj = {
+                        uname: '小明',
+                        sayHi: () => {
+                            console.log(this) //this 指向？ window   上一层是obj，而obj的作用域是window 所以this指向window
+                        }
+                    }
+                    obj.sayHi()  
+
+                     const obj = {
+                        uname: '小明',
+                        sayHi: function(){
+                            let i = 0
+                            () => {
+                                console.log(this) //this 指向？ obj 
+                            }  
+                        } 
+                    }
+                    obj.sayHi()  
+                    
+        解构赋值
+            数组解构
+                将数组的单元值快速批量赋值给一些列变量的简洁语法
+                例如：
+                    const arr = [100,60,80]
+                    // 数组解构 赋值
+                    const [max, min, avg] = arr
+                    // 相当于
+                    // const max = arr[0]
+                    // const min = arr[1]
+                    // const avg = arr[2]
+                    console.log(max) //100
+
+                交换变量：
+                    let a = 1
+                    let b = 2;
+                    [b,a] = [a,b]
+                    console.log(a,b)  //2,1
+
+                    必须加分号的两种情况：
+                        立即执行函数 (function(){ })();
+                        使用数组时
+                            不加分号理解为   报错
+                            const str = 'pink'[1,2,3].map(function(item){
+                                console.log(item) //1,2,3
+                            } ) 
+                            加上分开
+                            const str = 'pink';
+                            [1,2,3].map(function(item){
+                                console.log(item) //1,2,3
+                            } ) 
+
+                变量的几种情况：
+
+                    1.变量多单元值少
+                        const [a,b,c] = [1,2]
+                        console.log(a,b,c)   //1 2 undefined
+                    
+                    2.变量少单元值多 剩余参数(真数组)解决
+                        const [a,b,...c] = [1,2,3,4]  // c = [3,4]
+
+                    3.防止 undefined 传递 给默认值
+                        const [a=0,b=0] = [1,2]
+                        console.log(a,b)  // 1 2
+
+                        const [a=0,b=0] = []   
+                        console.log(a,b)  // 0 0 
+
+                    4.按需导入赋值
+                        const [a,b, , d] = [1,2,3,4]  // a=1 b=2 d=4
+
+                多维数组解构
+                    const [a,b,[c,d]] = [1,2,[3,4]]    //a=1 b=2 c=3 d=4
+                
+            对象解构
+                将对象 属性 和 方法 快速批量赋值给一系列变量的简洁语法
+                语法： 变量名必须与属性名一致(因为对象是无序的 数组是有序的)       在对象外面叫变量 里面叫属性
+                    const { uname, age } = { uname: '小明', age: 18 }
+                    // 等价于 const uname = obj.uname
+
+                1.对象解构的变量名 可以重新改名  旧变量名:新变量名
+                    const { uname:username, age } = { uname: '小明', age: 18 } 
+                    console.log(username)  // '小明'
+                
+                2.解构数组对象
+                    const pig = [
+                        {
+                            uname: '佩奇',
+                            age: 6
+                        }
+                    ]
+                    const [{uname,age}] = pig   //uname = '佩奇'  age = 6
+
+                    const pig = [
+                        {
+                            uname: '佩奇',
+                            age: 6,
+                            family: {
+                                mother: '妈妈',
+                                father: '爸爸',
+                                sister: '乔治'
+                            }
+                        }
+                    ]
+                    const [{ uname, age, family : { mother, father, sister }}] = pig
+
+                3.多级对象解构
+                    const pig = {
+                            uname: '佩奇',
+                            age: 6,
+                            family: {
+                                mother: '妈妈',
+                                father: '爸爸',
+                                sister: '乔治'
+                            }
+                        }
+                    const { uname, age, family : { mother, father, sister }} = pig
+
+        forEach 方法
+            //forEach 就是遍历 加强版的for循环  没有返回值 适合遍历数组对象 map有返回值适合修改数组内容 返回修改后数组
+            const arr = ['red', 'blue', 'pink']
+            //   被遍历数组.forEach(function(当前数组元素,当前元素索引号){})
+            // 索引号可以不写  
+            arr.forEach((item, index) => {
+                console.log(item)
+                console.log(index)
+            });
+            
+        filter 方法
+            筛选数组符合条件的元素,并返回筛选后的新数组  只能筛选(> < =)
+            语法:
+                const arr = [10,20,30]
+                const newAee = arr.filter(function(item,index){
+                    cosole.log(item)
+                    return item >= 20
+                })   // newArr = [ 30 ]
+
+
+        总结  
+            map        迭代数组         进行运算         返回新数组             map(回调函数{return...})
+            forEach    遍历数组         只遍历数组       不返回                 
+            filter     迭代数组         筛选合适条件     返回新数组
+            reduce      累计器          求和            返回累加结果
+
+            find                        查找             返回第一个数组元素
+            every                 筛选所有元素都符合条件    返回bool值
+            some                   筛选 有元素都符合条件    返回bool值
+
+        深入对象
+            创建对象的三种方式
+                1.字面量
+                    const obj = {
+                        name: '小明'
+                    }
+                2.new Object()
+                    const obj = new Object()
+                    obj.uname = '小明'
+
+                3.利用构造函数创建对象
+            构造函数
+                初始化对象 快速创建多个对象
+                约定: 函数名以大写字母开头 只能由"new"操作符来执行
+                例如: 
+                    function Pig (name, gender, age) {
+                        this.name = name
+                        this.gender = gender
+                        this.age = age
+                    }
+                    const pepa = new Pig('佩奇','男',6)
+                说明:
+                    使用new就是实例化  (创建一个对象)
+
+                实例化执行过程:
+                    1.创建新对象
+                    2.构造函数this指向新对象
+                    3.执行构造函数代码,修改this,添加新的属性
+                    4.返回新对象
+
+            实例成员&静态成员
+                1.实例成员:实例对象中的实例属性和实例方法 属于实例成员
+                2.构造函数的属性和方法被称为静态成员
+                    function Person(name,age) {
+                        this.name = name
+                        this.age = age
+                    }
+                    静态属性
+                    Person.eyes = 2
+                    静态方法: this指向构造函数自己
+                        Person.seyHi = function() {
+                            console.log(this)  
+                        }
+                        调用
+                        Person.seyHi()
+                
+        内置构造函数
+            引用类型：
+                Object
+                    三个常用的静态方法
+                        1.获取所有的属性名Object.keys() 返回一个数数组
+                        例如:
+                            const o = { uname: 'pink', age: 18}
+                            console.log(Object.key(o))  //[uname,age]
+
+                        2.获取所有的值 Object.values() 返回一个数数组    
+                            console.log(Object.values(o)) //['pink',18]
+
+                        3.拷贝对象 Object.assign(获得拷贝内容的对象,拷贝的对象)    
+                            const a = {}
+                            Object.assign(a,o)
+
+                            Object.assign(o, gender: '女')  
+                        
+                Array
+                    累计器 arr.reduce(function(上一次的值,当前值),初始值)
+                            prev是上一次值,也是数组的第一个元素,但是当数组是数组对象时,数组第一个元素是对象{},
+                            必须要写初始值=0,这样才不会出错
+                            
+
+                        1.没有初始值
+                        例如:
+                            const arr = [1,2,3]
+                            const total = arr.reduce(function(prev,current){
+                                return prev + current
+                            })
+                            console.log(total) //6
+                        2.有初始值
+                            const arr = [1,2,3]
+                            const total = arr.reduce(function(prev,current){
+                                return prev + current
+                            },10)
+                            console.log(total) //16
+                        
+                        3.箭头函数写法
+                            const arr = [1,2,3]
+                            const total = arr.reduce((prev,current) => prev + current,10)
+                            console.log(total) //16
+                    原理: 递归/递推         返回值作 为下一次循环的 上一次值
+                    
+                    常见方法 MDN文档手册
+                        jion
+                        find
+                            find(function(item,index){ 返回第一个数组元素的值 })
+                            const arr =[
+                                {
+                                    name: '小米',
+                                    price: 1999
+                                },
+                                {
+                                    name: '华为',
+                                    price: 3999
+                                }
+                            ]
+                            找小米并返回小米对象
+                            const mi = arr.find(item => item.name === '小米'})
+                            console.log(mi)  //{ name: '小米', price: 1999 }
+                        every   
+                            检测数组中所有元素是否符合条件，如果 所有元素 都通过测试返回true 否则返回false
+                        some
+                            检测数组中的元素是否符合条件，如果 有元素 通过测试返回true 否则返回false
+                        
+                    静态方法(不是内置构造函数了) 伪数组转换为真数组 Array.from(数组)
+                            html：
+                                <ul>
+                                    <li>1</li>
+                                    <li>2</li>
+                                    <li>3</li>
+                                </ul>
+                                
+                            script:
+                                const lis = document.querySelector('li') //获取生成的是一个伪数组
+                                const liss = Array.from(lis)  //liss 是真数组
+            包装类型：
+                String
+                    const str = 'pink' 
+                    实际上js底层包装时是:
+                    const str = new String('pink')
+                    所以简单数据类型str也有属性和方法 比如str.length
+
+                    常见方法：
+                        length
+                        split
+                            字符串转换成数组        join是把数组转换成字符串
+                                const str = 'pink,red'
+                                const arr = str.split(',')  //arr = ['pink','red']
+
+                                const str = '2022-4-8'
+                                const arr = str.split('-')  //arr = ['2022','4','8']
+
+                        substring   字符串的截取
+                            substring(indexStart[,indexEnd])
+                                const str = '字符串的截取'
+                                console.log(str.substring(2))  //没写默认截取到最后   串的截取 index是从0开始
+                                console.log(str.substring(2,4))  //串的     index=4 不包含
+                        
+                        startsWith  检测字符串是以什么开头
+                            startsWith(以什么开头[,indexstart])
+                                const str = '检测字符串'
+                                console.log(str.startsWith('检')) //true
+                                console.log(str.startsWith('字',2)) //true
+                        
+                        includes    判断是否包含子字符串
+                            includes(子字符串[,indexstart])
+                                const str = 'my name is .hh'
+                                console.log(str.includes(name)) //ture
+                                console.log(str.includes(name,4)) //false index = 4 是从a开始找 空格也要算索引
+                        转换成字符串：
+                            const num = 10
+                            1.String(num)  //字符串得 10
+                            2.num.toString()  //字符串得 10
+
+                                
+                Number
+                    toFixed() 保留小数位的长度 四舍五入
+                        const num = 10.925
+                        console.log(num.toFixed())  //11  四舍五入
+                        console.log(num.toFixed(2)) //10.93
+
+        深入面向对象
+            编程思想
+                面向过程
+                    先确定步骤 一步一步 
+                面向对象  （面向对象编程（oop））
+                    封装    继承    多态
+            构造函数
+                构造函数体现了 面向对象得封装性
+            原型
+                        解决构造函数里浪费内存得问题
+                原型
+                    构造函数中的通过原型分配的函数是所有对象共享的
+                    JavaScript规定每一个构造函数都有一个*****prototype属性，指向一个对象******，所以我们也称为原型对象
+                    把不变的方法直接定义在 prototype 上所有对象的实例就可以共享这些方法
+                    构造函数和原型对象中的this 都指向实例化对象
+
+                    例如：
+                        function Star (uname,age) {
+                            this.uname = uname
+                            this.age = age
+                            this.sing = function (){
+                                console.log('唱歌') //ldh.sing !=== zxy.sing 每个实例化会开辟一个新的空间 造成做同样的事情多次 空间浪费
+                            }
+                        }
+                        //公共方法写到原型对象上
+                        Star.prototype.sing = function {
+                            // 里面的this指向实例化对象
+                            console.log('唱歌')
+                        }
+                        const ldh = new Star('刘德华')
+                        const zxy = new Star('张学友')
+                        console.log( ldh === zxy ) //true
+
+                constructor属性
+                    constructor 单词意思：构造函数
+                    让原型对象（Star.prototype 是一个对象） 指向 自己的父亲
+                        Star.prototype = {
+                        constructor: Star,
+                        sing: console.log('唱歌'),
+                        paly: console.log('玩')
+                        }
+                        console.log(Star.prototype)
+
+                对象原型
+                    __proto__ 其实是两个杠杠 _ _proto_ _ 
+                    __proto__ 是js非标准 [[prototype]]与__proto__意义相同
+
+                    function star2() { }
+                    const ldh = new Star()
+                    // 对象原型__proto__指向 该 构造函数的原型对象
+                    console.log(ldh.__proto__ === Star.prototype) //true
+
+                    对象里面也有constructor属性
+                    // 对象原型里面的constructor 指向 构造函数 Star
+                    console.log(ldh.__proto__.constructor === Star) //true
+                        
+
+                原型继承
+                    11-原型继承 
+                    通过prototype实现继承
+                        
+                原型链
+                    所有的对象里面都有__proto__对象原型 指向原型对象
+                    所有的原型对象里面都有 constructor 指向 创造该原型对象的构造函数
+
+                    Star.prototype是实例对象.__prto__的父亲 constructor与prototype是两个相反的指向
+                    Star.prototype.constructor 指向 Star  实例对象.construct指向Star
+                    Star.prototype.__proto__指向它的父亲(Object.prototype) 
+                    Star.prototype.__proto__.constructor指向Object
+                    
+                    查找规则：
+                        （1）当访问一个对象的属性（包括方法）时，首先查找这个对象自身有没有该属性
+                        （2）如果没有就查找它的原型 （也就是__proto__指向的prototype原型对象）
+                        （3）还没找到继续找原型对象的原型（Object的原型对象）
+                        （4）直到Object为null
+                        （5）对象原型__proto__的意义在于为对象成员提供一个方向
+                        （6）可以使用instanceof运算符检测构造函数的prototype属性是否出现在某个实例化对象的原型链上  
+
+                        console.log(ldh instanceof Object) //true  ldh对象是否属于对象
+                        console.log(Star instanceof Object) //true  Star构造函数是否属于对象
+                        console.log(Star instanceof Object) //true
+                        console.log([1,2,3] instanceof Object) //flase
+                        console.log([1,2,3] instanceof Array) //true
+                        console.log(Array instanceof Object) //true  一切皆对象
+
+        深浅拷贝
+                        引用数据类型直接赋值是给的地址
+            浅拷贝
+                const obj = {
+                    uname: 'pink',
+                    age: 18,
+                    family: {
+                        baby: '小pink'
+                    }
+                }
+                法一：
+                const o = {...obj}
+                o.age = 20
+                o.family.baby = '老pink'
+                console.log(obj.age,o.age,obj.family.baby,o.family.baby) //18 20 老pink 老pink
+                法二：
+                const o = {}
+                Object.assign(o,obj)
+                console.log(obj.age,o.age,obj.family.baby,o.family.baby) //18 20 老pink 老pink
+                所以只能拷贝一层
+                    
+            深拷贝 (函数递归、js库lodash里的_.cloneDeep、JSON字符串转换)
+                拷贝的是对象，不是地址 重新创建一个与老对象的值完全相同的新对象 但是修改新对象的值老对象不变 地址不同 
+                1.函数递归
+                    let i = 1
+                    fuunction fn(){
+                        console.log('这是第${i}调用')
+                        if(i>=6) {
+                            return 
+                        }
+                        fn()
+                    }
+                    fn()
+                    实现setTimeout 模拟setInterval
+                    function getTime(){
+                        document.querySelector('div').innerHTML = new Data().toLocaleString() //toLocaleString()获取当前时间
+                        setTimeout(getTime,1000)   
+                    }
+                   getTime()
+
+                    实现深拷贝
+                    const obj = {
+                    uname: 'pink',
+                    age: 18,
+                    hobby: ['兵乓球','足球']
+                    }
+                    function deepCopy(newObj,oldObj) {
+                        for( let k in oldObj) { //k是属性名 是变量 odlObj[k]是属性值 
+                            // 判断是否属于数组 instanceof   
+                            //一定要想判断数组 因为Array instanceof Object 先判断对象会把数组当成对象判断 从而不执行数组
+                            if(oldObj[k] instanceof Array) {
+                                newObj[k] = []
+                                deepCopy(newObj[k],oldObj[k])
+                            }
+                            else if(oldObj[k] instanceof Object){
+                                newObj[k] = {}
+                                deepCopy(newObj[k],oldObj[k])
+                            }
+                            else {
+                                //k 属性名 oldObj[k]属性值
+                                // 给新对象添加属性
+                                //不能用newObj.k = oldObj.k 这样是给对象newObj创建一个新属性k 属性值是oldObj[k]
+                                newObj[k] = oldObj[k]  
+                            }
+                            
+                        }
+                    }
+                    contst o = {}
+                    deepCopy(o,obj) //obj的内容 等于 o的内容但是地址不一样
+                    o.age = 20
+
+                    // for...in  
+                    const obj = {
+                        name: '哈喽',
+                        age: 18
+                    }
+                    for (let k in obj) {
+                        console.log(k)  //name age
+                        console.log(obj[k]) //哈喽 18
+                    }
+
+                2.常见方法
+                    js库lodash里面的cloneDeep()
+                    语法 _.cloneDeep(object)
+                    13-lodash实现深拷贝
+
+                3.方法三
+                    const obj = {
+                    uname: 'pink',
+                    age: 18,
+                    hobby: ['兵乓球', '足球'],
+                    family: {
+                            baby: '小pink'
+                        }
+                    }
+                    把对象转换为JSON 字符串 简单数据类型 赋值 是赋值内容  再转换回来
+                    const o = JSON.parse(JSON.strinigfy(obj))
+                    console.log(o)
+
+
+        异常处理
+            throw 抛异常
+                function fn(x,y) {
+                    if(!x || !y) {
+                        // throw '没有参数传递进来'  //抛出异常 程序终止
+                        throw new Error('没有参数传递进来')  //抛出异常显示 错误行数 更详细
+                    }
+                    return x+y
+                }
+
+            try/catch 捕获异常
+                function fn() {
+                    try {
+                        可能发生错误的代码 写到try里面
+                    } catch(err) {
+                        // 拦截错误 提示浏览器提供的错误信息 但不中断程序执行 err.message调用错误信息
+                        console.log(err.message)
+                        // 需要加return 中断程序 
+                        // return 
+                        // 也可以
+                        throw new Error('错误') 
+                    }
+                    finally {
+                        // 不管程序对不对 一定要执行的代码
+                        alert('弹出对话框')
+                    }   
+                    console.log(11)  //继续执行 11
+                }
+                
+
+            debugger  标记断点 调试用的
+                    
+        处理this
+            this指向
+                普通函数this指向
+                    谁调用就指向谁
+                    'use strict' //严格模式 所有代码必须先声明再使用
+                        function fn() {
+                            'use strict'
+                            console.log(this) //undefined
+                        }
+                        fn()
+
+                箭头函数指向
+                    它的this 绑定最近一层的外层的this 
+                    不适用:
+                        构造函数 原型函数 DOM节点事件
+
+            改变this
+                // call  会调用函数   函数名.call(this指向谁,参数)
+                    const obj = {
+                        uname: 'pink'
+                    }
+                    function fn(x,y) {
+                        console.log(this) //原本指向window 现在指向obj xy是参数
+                    }
+                    // 调用函数 改变this指向
+
+                    fn.call(obj,1,2) //x=1 y=2
+
+                //apply 会调用函数  函数名.apply(this指向谁,数组参数)
+                    const obj = {
+                        uname: 'pink'
+                    }
+                    function fn(x,y) {
+                        console.log(this) //原本指向window 现在指向obj xy是参数
+                    }
+                    // 调用函数 改变this指向  
+                    fn.apply(obj,[1,2]) //x=1 y=2
+                    // 返回值 本身再调用函数，所以返回值就是函数的返回值
+
+                    使用场景：求最大值
+                    // 1.
+                    const max = Math.max(1,2,3)
+
+                    //2.
+                    const arr = [100,4,77]
+                    const max = Math.max.apply(Math,arr) //100
+                    const min = Math.min.apply(null,arr) // 第一个参数可以为null当必须写
+
+                    //3.
+                    console.log(Math.max(...arr))
+                
+                //bind()    不调用函数
+
+                    const obj = {
+                        age: 18
+                    }
+                    function fn() {
+                        console.log(this)
+                    }
+                    // 1.不调用函数
+                    // 2.改变this指向
+                    // fn.bind()   //验证不会调用函数
+                    // 3.返回值是函数   但是这个函数里面的this是更该后的
+                    const fun = fn.bind(obj)        //bind 将 fn的内容拷贝了一遍 赋值给fun
+                    fun()  // {age: 18}
+
+                    // 需求 有一个按钮 点击里面就禁用 2秒后开启
+                    const btn = document.querySelector('button') 
+                    btn.addEventListener('click',function(){
+                        // 禁用按钮
+                        this.disabled = true
+                        window.setTimeout(function(){
+                            this.disabled = false //this指向调用者 window.setTimeout 指向window
+                            // btn.disabled = false //这个就可以了 但是我就想用this 见下面
+                            // 我们要this由原来的window后改为btn
+                        }.bind(this),2000)  //bind是在匿名函数外面写的所以这里的this指向btn 在匿名函数里面写的就指向window 然后bind改变了匿名函数里面的this指向
+
+                    })
+
+        性能优化
+            防抖
+                单位时间内 频繁触发事件，只执行最后一次（也就是说这一次点击会中断上一次点击 上一次点击不再执行 下一次点击会中断这一次点击 这一次点击不再执行 直到点了最后一次 执行）
+                使用场景：
+                    搜索框搜索输入。只需要用户最后一次输入完再发送请求
+                    手机号、邮箱验证输入检测
+                实现方式：
+                    1、lodash库         _.debounce
+                        _.debounce(func, [wait=0], [options=])
+                        延迟 wait 毫秒后调用 func 方法
+                        例如: 14-性能优化防抖
+                    2、手写一个防抖函数
+            
+            节流——throttle 
+                单位时间内 频繁触发事件，只执行一次 （也就是说要无论点击多少次按钮都要等第一次执行完 此时再点击才能进行下一次）
+                使用场景：鼠标移动mousemove、页面尺寸缩放resize、滚动条滚动scroll等等
+                 实现方式：
+                    1、lodash库     _.throttle 
+                        _.throttle(func, [wait=0], [options=])
+                        在 wait 秒内最多执行 func 一次的函数
+                        例如: 15-性能优化节流
+                    2、手写一个防抖函数  
+                    
+                    
+            案例16：
+                    //ontimeupdate 事件在视频/音频（audio/video）当前播放位置发生改变时触发
+                    // onloadeddata 事件在当前帧的数据加载完成且还没有 足够的数据播放视频/音频的下一帧触发  页面一打开触发
+            
+                
+                    
+
+        */
+
+    </script>
+</body>
+
+</html>

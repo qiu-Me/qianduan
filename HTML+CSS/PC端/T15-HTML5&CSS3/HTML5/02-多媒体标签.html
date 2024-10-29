@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        video {
+            width: 1000px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <!-- video 视频 mp4更兼容
+    属性        值           描述
+    autopaly   autopaly     视频就绪自动播放(但是浏览器一般禁用此功能)  
+    controls    controls    向用户显示播放按钮（一般不写，用js写）
+    width       px          设置视频宽度
+    height      px           设置视频高度
+    loop        loop          循环播放
+    preload     auto/none     是否预先加载（如果有了autopaly就忽略该属性
+    src         url           视频url地址
+    poster      imgurl        加载等待动画图片
+    muted       muted         静音播放
+    -->
+    <video src="2023-03-31 16-16-53.mp4" autopaly="autopaly" controls="controls" loop="loop"
+        poster="bige_1006190817_22199.png" muted="muted">
+    </video>
+
+    <!-- audio 音频 mp3更兼容
+        属性          值             描述
+        autoplay    autoplay       自动播放
+        controls    controls    向用户显示播放按钮
+        loop        loop          循环播放
+        src         url           视频url地址
+     -->
+    <audio src="吴昱翰 - 如果我不是我.mp3" autoplay="autoplay" controls="controls" loop="loop"></audio>
+
+</body>
+
+</html>

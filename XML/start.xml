@@ -1,0 +1,17 @@
+<!-- XML文档定义 -->
+<!-- <?xml version="1.0" ?> -->
+
+<?xml-model href="file.dtd" type="application/xml-dtd"?>
+<!DOCTYPE message [
+    <!ELEMENT message (receiver,sender,header,msg) >
+    <!ELEMENT receiver (#PCDATA)>
+    <!ELEMENT sender (#PCDATA)>
+    <!ELEMENT header (#PCDATA)>
+    <!ELEMENT msg (#PCDATA)>
+]
+<message>
+    <receiver>Myself</receiver>
+    <sender>Someone</sender>
+    <header>hello</header>
+    <msg>this is msg</msg>
+</message>

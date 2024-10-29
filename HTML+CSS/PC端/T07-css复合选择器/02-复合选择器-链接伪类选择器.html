@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /* 必须是link visited hover active 的顺序声明 改变顺序无效 LVHA:love hate(方便记) */
+        /* a链接在浏览器中有默认样式，必须单独指定样式 如改变body但是a不得改变 */
+        /* 1.未访问过得链接 a:link 把没访问过得链接选出来*/
+        a:link {
+            color: black;
+        }
+
+        /* 2.a：visited 访问过得链接选出来 */
+        a:visited {
+            color: orange;
+        }
+
+        /* 3.a:hover 选择鼠标经过的那个链接 */
+        a:hover {
+            color: aqua;
+        }
+
+        /* 4.a:active 选择我们鼠标按下还没有弹起鼠标的那个链接 */
+        a:active {
+            color: blueviolet;
+        }
+        /* 平时用法 */
+        .a {
+            color: black;
+            text-decoration: underline;
+        }
+        .a:hover {
+            color: red;
+        }
+
+        /* :focus 伪类选择器 光标在的表单元素*/
+        input:focus {
+            background-color: pink;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="#">喜羊羊</a>
+    <a href="http://www.xxxx.com" class="a">美羊羊</a>
+
+    <input type="text"> 
+    <input type="text"> 
+    <input type="text"> 
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            /* 给父级添加flex属性 */
+            display: flex;
+
+            width: 800px;
+            height: 300px;
+            background-color: pink;
+            /* 默认的主轴是 x 轴/行row      那么y轴就是侧轴
+            元素排列跟着   主轴    */
+            flex-direction: row;
+
+            /* 简单了解翻转 */
+            /* flex-direction: row-reverse; */
+
+            /* 把主轴设置为y轴，则x轴为侧轴 */
+            /* flex-direction: column; */
+
+            /* 设置主轴的子元素排列方式 */
+            /* 左对齐 */
+            /* justify-content: flex-start; */
+            /* 右对齐 */
+            /* justify-content: flex-end; */
+            /* 居中对齐 */
+            /* justify-content: center; */
+            /* 平分剩余空间 */
+            justify-content: space-around;
+            /* 先两边贴边 在平分剩余空间 */
+            /* justify-content: space-between; */
+
+
+            /* flex布局中 子元素默认不换行 如果装不下会缩小子元素宽度 放到父元素里面 */
+            /* 默认值 不换行*/
+            /* flex-wrap: nowrap; */
+            /* 换行 */
+            flex-wrap: wrap;
+
+            /* flex-flow是 flex-direction和flex-wrap的复合属性 */
+            /* 可以写成 */
+            /* flex-direction: row;
+            flex-wrap: wrap; */
+            flex-flow: row wrap;
+
+            /* 侧轴 */
+            /* 单行使用 */
+            /* align-items设置侧轴居中 */
+            /* flex-start center flex-end stretch是拉伸 当盒子没有height时才生效 */
+            /* align-items: center; */
+
+            /* 多行使用 */
+            /* align-content设置侧轴多行 必须要有换行flex-wrap才有效 单行无效*/
+            /* 两侧靠 平分中间部分 */
+            /* align-content: space-between; */
+            /* 侧轴平分剩余空间 */
+            align-content: space-around;
+
+
+
+
+        }
+
+        div span {
+            width: 150px;
+            height: 100px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- javascript是一门编程语言 实现网页交互效果 -->
+    <!-- 结尾可以写分号也可以不用 严格区分大小写 弱数据类型语言(只有赋值了才知道是什么类型) -->
+    <!-- 内部js -->
+    <!-- <script>
+        // 页面弹出警告框
+        alert('你好，js')
+        /*多行注释*/
+    </script> -->
+    <!-- 外部js 一般不允许中间有内容 -->
+    <!-- <script src="01.1-外部js.js"></script> -->
+    <!-- 行内 js-->
+    <!-- <button onclick="alert('嘿嘿')"></button> -->
+
+    <!-- 输入输出 -->
+    <script>
+        // 1、文档输出内容 
+        document.write('我是输入内容')
+        document.write('<h1>我是标题</h1>')
+        // 2、控制台打印输出 给程序员看
+        console.log('日志')
+        // 3、输入
+        let a = prompt('请输入：')
+        document.write(a)
+        //parseInt('111') 打印数字111
+
+        // alert() 弹框
+
+        // 变量
+        // let age = 18;
+        /*
+        数组   
+        let arr = ['hahha', '耶耶耶', '第三'];
+        console.log(arr[2]);
+
+        常量
+        const pi = 3.14;
+
+        console.log(3 % 5);//可以简单运算
+        //NaN是粘性的 与所有数运算结果都是NaN 但不是本身
+        console.log(NaN + 2);
+
+        字符串
+        let str = 'dsdd';// "hyhh" `fvg` 双引号 反引号都可以 可以嵌套 但是最好是外单内双 或者外双内单
+        //拼接
+        console.log('hh' + 'ok');
+        //模板字符串：拼接字符串
+        document.write(`字符串${str}模板字符串`);
+
+        布尔型 boolean
+        boolean a = True;
+        0 undefined null NaN 都是 false
+        其余为 true
+            if(true)一定是这样
+
+        检查数据类型
+        typeof(x) 或者 typeof x
+        let num = 10;
+        console.log(typeof(num)); //number(数字)
+
+        类型转换
+        //隐私转换
+        console.log('pink' + 1); //pink1
+        console.log(1 + '1'); //11
+        console.log(2 - '2'); //0
+        // 只有加号不一样 其他符号都是转换成数字类型处理
+        console.log(+'123'); //123
+        //显示转换
+        let str = '123';
+        console.log(Number(str));//123 Number转换成数字类型 NaN也是数字类型表示非数字类型
+        
+        console.log(parseInt('12.34px')); // 12.34
+        console.log(parseInt('abc12.34px')); // NaN
+
+        let number = prompt('请输入：'); //prompt得到的是字符串
+
+        选择分支
+        switch() {
+            case 值1: 
+                代码1
+                break
+            case 值2:
+                代码2
+                break
+            default:        //都没有就执行
+                代码n
+                break
+        }
+
+        断点测试
+        F12
+
+        数组
+            新增 
+            push在末尾添加 可添加多个
+            arr.push('dee','uyye')
+            console.log(arr.push('deee')) //返回当前数组长度 已经加入
+            unshift在前面添加 可添加多个
+            删除
+            pop删除最后一个元素
+            arr.pop('dsf')
+            shift删除第一个元素
+            splice(开始位置,删除几个)
+            arr.splice
+
+
+        函数
+            function 函数名(){ }
+
+            function getSum(end){} //end: any
+            调用
+            getSum(50)
+
+            function getSum(start,end){}  //形参不需要声明
+            getSum(1,100) 
+            getSum() //无参函数和有参函数都要调用 需要形参赋值 function getSum(start=0,end=0){}
+
+            例子 函数求和
+            function getArrSum(arr = []) {
+                let sum = 0
+                for (let i = 0 ;i < arr.length)
+                {
+                    sum += arr[i]
+                }
+                //在控制台输出
+                console.log(sum)
+            }
+
+            getArrSum([1,2,3,4,5])
+            getArrSum() //null
+
+        匿名函数 
+            防止污染
+            1.函数表达式
+            let fn = function(x,y){...}
+            调用
+            fn(1,2)
+
+            2.立即执行函数 直接用
+            写法一
+            (function(){})();
+
+            (function(x,y){
+                console.log(x+y)
+            })(1,2); 
+            写法二
+            (function(){}());
+
+            (function(x,y){
+                console.log(x+y) //3
+            }(1,2));
+
+            以上还可以写成 (function getSum(){})(); 函数可以不调用就执行
+
+        逻辑中断
+        1.
+            function getSum(x,y)
+            {
+                x = x || 0
+                y = y || 0
+                console.log(x+y)
+            }
+            getSum(1,2) //不报错
+            getSum()  //不报错 因为undefined表示假 0 || 0 = 0
+        2.
+            let age = 18
+            console.log(false && age++) //false 并且age=18 未变 因为呈现执行到false时发生中断 false&&任何一个数都是false 
+            console.log(11 && 22) // 22 都是真 输出最后一个真
+            console.log(11 || 22) // 11 都是真 输出第一个真 
+            console.log(undefined && 20) //undefined
+
+            null + 3 //3
+            undefined + 3 // NaN
+
+            null == undefined //true null等于undefined
+            null === undefined // false  null不全等于undefined
+
+        
+        对象 无序的 由 属性 和 方法 构成
+        null是一个空对象
+        null 类似 let a = {}
+        let a = null
+            属性名无需声明
+            let 对象名 = {
+                属性名： 属性值,
+                属性名： 属性值
+            }
+            let 对象名 = new object
+
+                let obj = {
+                    uname: 'hshd',
+                    'uname-goods': 'jsgdjwehg'
+                    gender: '女'
+                    //在对象里面的叫方法 对象外面的叫函数
+                    song: function (x,y){
+                        console.log('哈喽')
+                    },
+                    age: 18
+                }
+            方法调用 对象名.方法名
+            obj.song(1,2)
+            console.log(obj.song(1,2)) // undefined 没有return
+
+            
+            
+            查 对象名.属性名 或者 对象名['属性名']
+            obj.age
+            obj['uname-goods']
+
+            改 对象名.属性名 = 新值
+            obj.age = 19
+
+            增 对象名.新属性名 = 新值
+            obj.like = '苹果'
+
+            删 delete对象名.属性名
+            delete obj.like
+            
+            注意:
+            let f = function (x, y) {
+            console.log(x + y)
+            //return x + y
+            }
+            f(1, 2)
+            //console.log(f(1, 2)) 有return才能这样用
+
+            遍历对象
+                也可以遍历数组但不推荐
+                arr = ['pink','sdfs','dsfe']
+                for (let k in arr) {
+                    console.log(k) //数组的下表 但是是字符串
+                }
+            for (let k in obj) {
+                console.log(k) //k是键 打印的是属性名 但是加了引号 'uname'
+                //console.log(obj.k) //错 相当于 obj.'uname'
+                console.log(obj[k]) //对 
+                console.log(obj['uname'])
+            }
+
+            内置对象
+            属性
+            console.log(Math.PI)
+            方法(函数)
+            //向上取整
+            consolelog(Math.ceil(1.1)) //2
+            //向下取整
+            console.log(Math.floor(1.1)) //1
+            //四舍五入 round 取离得最近得整数
+            console.log(Math.round(2.2)) //2
+            console.log(Math.round(2.6)) //3
+            console.log(Math.round(-20.5)) //-20
+            console.log(Math.round(-20.51)) //-21
+            //取整函数 与round区别就是可以去掉以数字开头的数字后面得字符串
+            parseInt(1.2) //1
+            parseInt('12px') //12
+            
+            console.log(Math.max(1,2,3,4,5))
+            console.log(Math.min(1,2,3,4,5))
+            console.log(Math.abs(-1)) //1
+
+            随机函数random() 取值 [0,1) 可以取0不能取1
+
+            生成 0~10 之间得整数
+            console.log(Math.floor(Math.random()*(10+1)))
+            生成 5~10 之间得整数
+            console.log(Math.floor(Math.random()*(10+1)) + 5 )
+
+            取 N~M 的随机整数 包括N和M
+            Math.floor(Math.random()* (M - N + 1)) + N
+            let arr = ['pink','sdfs','dsfe']
+            let random = Math.floor(Math.random() * arr.length)
+            console.log(random)
+        
+        值与引用类型
+        值在栈开辟 引用类型在堆开辟
+
+         对象就是在堆里开辟
+        */
+
+
+    </script>
+
+</body>
+
+</html>

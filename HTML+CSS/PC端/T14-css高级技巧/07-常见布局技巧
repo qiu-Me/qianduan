@@ -1,0 +1,58 @@
+1.margin负值巧妙运用
+先浮动会贴紧 再负值后一个盒子的边框会压住第一个盒子 就不会出现俩盒子在一起边框加粗的效果了
+如何让鼠标经过时改变边框颜色并 显示全部的边框
+    方法1.如果盒子没有相对定位，添加即可(相对定位占位置)
+    position: relative;
+    方法2.如果都有定位，让这个盒子位置更高一些
+    添加z-index: 1;
+2.文字环绕浮动元素
+文字设置为标准流且在父盒子里100%显示，图片为浮动，则文字不会被图片压住。
+3.行内块巧妙运用
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    .box a {
+        display: inline-block;
+        height: 20px;
+        width: 20px;
+        font-size: 14px; 
+        background-color: #fff;
+        border: 1px solid #ccc;
+        text-align: center;
+        text-decoration: none;
+        color: #333;
+    }
+    .box .one {
+        width: 85px;
+    }
+</style>
+<body>
+    <div class="box">
+        <a href="#" class="one">&lt;&lt; 上一页</a>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#" class="one">&gt;&gt; 下一页</a>
+    </div>
+</body>
+4.强化三角
+div{
+    width: 0;
+    height: 0;
+
+    把左边和下边的边框宽度设置为0（就会看不见）
+    border-bottom: 0 solid bule;
+    border-left: 0 solid green;
+    把上边框宽度调大
+    border-top: 100px solid transparent;
+    border-right: 50px solid  skyblue;
+
+    简化：    取一个三角形
+    border-color: red transparent transparent transparent;
+    border-style: solid;
+    border-width:100px 50px 0 0;
+}
+
+

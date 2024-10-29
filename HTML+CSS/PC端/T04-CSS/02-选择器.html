@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择器</title>
+
+    <style>
+        /* 标签选择器 不能差异化选择 */
+        p {
+            color: pink;
+        }
+        div {
+            color: blue;
+        }
+
+        /* 类选择器  可以根据需求选择*/
+        /* 口诀：样式点定义 结构类(class)调用 一个或多个 开发最常用*/
+        .a {
+            color: aqua;
+        }
+
+        /* 案例 */
+        .red {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+        .green {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+        }
+
+        /* 多类名 */
+        .box {
+            width: 50px;
+            height: 50px;
+        }
+        .acolor {
+            color: aquamarine;
+        }
+        .font20 {
+            font-size: 30px;
+        }
+
+        /* id选择器 ID属性只能在每个HTML文档中出现一次 一般搭配js*/
+        /* 口诀：样式#定义，结构id调用，只能调用一次，别人切勿使用 */
+        #pink {
+            color: pink;
+        }
+
+        /* 通配符选择器 选择太多，有部分不需要 */
+        /*
+
+        * {
+            color: red;
+        }
+        这里把 html body div span li 等等所有标签都改成红色
+
+        */
+    </style>
+</head>
+<body>
+    <p>男生</p>
+    <p>男生</p>
+    <p>男生</p>
+
+    <div>女生</div>
+    <div>女生</div>
+    <div>女生</div>
+
+    <ul>
+        <li class="a">冰雨</li>
+        <li>荷叶</li>
+        <li>花朵</li>
+        <li>苹果树</li>
+    </ul>
+    <div class="a"> 耶耶耶</div>
+
+    <div class="red box">红色</div>
+    <div class="green">绿色</div>
+    <div class="red box">红色</div>
+
+    <div class="acolor font20">刘德华</div>
+
+    <div id="pink">用的id选择器的</div>
+
+</body>
+</html>

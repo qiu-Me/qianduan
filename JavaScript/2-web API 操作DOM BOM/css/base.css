@@ -1,0 +1,75 @@
+/* 把所有便签内外便签清零 */
+* {
+    margin: 0;
+    padding: 0;
+    /* css3盒子模型 */
+    box-sizing: border-box;
+}
+
+/* 设置文字不倾斜 */
+em,
+i {
+    font-style: normal;
+}
+
+/* 去掉小圆点 */
+li {
+    list-style: none;
+}
+
+img {
+    /* 照顾低版本浏览器 如果图片外面包含了链接会有边框的问题 */
+    border: 0;
+    /* 取消图片下面空白的部分 */
+    vertical-align: middle;
+}
+
+/* 鼠标变成小手 */
+button {
+    cursor: pointer;
+}
+
+/* 取消链接下划线 */
+a {
+    color: #666;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #c81623;
+}
+
+button,
+input {
+    /* Unicode编码 "\5B8B\4F53"是宋体 防止汉字会出现乱码 浏览器兼容更好*/
+    font-family: Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, "\5B8B\4F53", sans-serif;
+    /* 默认有灰色边框需要手动去掉 */
+    border: 0px;
+    outline: none;
+}
+
+body {
+    /* CSS3 防止文字放大有锯齿性 让文字更清晰 */
+    -webkit-font-smoothing: antialiased;
+    background-color: #fff;
+    font: 12px/1.5 Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, "\5B8B\4F53", sans-serif;
+    color: #666;
+}
+
+.hide,
+.none {
+    display: none;
+}
+
+/* 清除浮动 伪元素法 */
+.clearfix:after {
+    visibility: hidden;
+    clear: both;
+    display: block;
+    content: ".";
+    height: 0
+}
+
+.clearfix {
+    *zoom: 1;
+}

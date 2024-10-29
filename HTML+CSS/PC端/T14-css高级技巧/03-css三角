@@ -1,0 +1,14 @@
+小三角
+设置盒子属性宽高为0，设置边框border指定上下左右一种颜色 其余为透明 调整大小是边框大小
+.box01 {
+    width: 0;
+    height: 0;
+    
+    为了照顾兼容性
+    line-height: 0;
+    font-size: 0;
+
+    boeder: 10px solid transparent;
+    boeder-left-color: pink;
+    margin: 100px auto;
+}

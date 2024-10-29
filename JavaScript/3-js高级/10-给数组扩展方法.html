@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const arr = [1, 2, 3]
+        // const arr = new Array
+        // 自定义方法
+        Array.prototype.max = function () {
+            return Math.max(...this)
+        }
+        console.log(arr.max())
+        console.log([2, 5, 9].max())
+
+        // 求和
+        Array.prototype.sum = function () {
+            return this.reduce((prev, item) => prev + item, 0)
+        }
+        console.log(arr.sum())
+
+
+        function Star(uname, age) {
+            this.uname = uname
+            this.age = age
+            this.sing = function () {
+                console.log('唱歌') //ldh.sing !=== zxy.sing 每个实例化会开辟一个新的空间 造成做同样的事情多次 空间浪费
+            }
+        }
+        Star.prototype = {
+            constructor: Star,
+            sing_1: console.log('唱歌歌'),
+            paly: console.log('玩')
+        }
+
+        console.log(Star.prototype)
+
+        function star2() { }
+        const ldh = new Star()
+        // 对象原型__proto__指向 该 构造函数的原型对象
+        console.log(ldh.__proto__ === Star.prototype)//ture
+
+        // 对象原型里面的constructor 指向 构造函数 Star
+        console.log(ldh.__proto__.constructor === Star) //true
+
+        console.log(Star.prototype.constructor === Star) //ture
+        console.log(ldh.constructor)
+        console.log(ldh.__proto__.constructor)
+        console.log(Star.prototype.__proto__.constructor)
+        console.log(ldh.prototype) //undefined
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 内边距padding会影响盒子大小 */
+        .one {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+
+            padding-top: 5px;
+            padding-left: 5px;
+            padding-bottom: 5px;
+            padding-right: 5px;
+
+            /* 内边距 复合写法 简写 空格分隔，不能改变顺序 */
+            /* 四周都为5px */
+            padding: 5px;
+            /* 上下为5，左右为10 */
+            padding: 5px 10px;
+            /* 上为5 左右为10 下为20 */
+            padding: 5px 10px 20px;
+            /* 上5 右10 下20 左30  顺时针*/
+            padding: 5px 10px 20px 30px;
+
+        }
+
+        /* padding 不影响盒子大小 标签本身没有指定width/height属性，padding也不会撑大盒子 ，但即使width：100%，也会撑大盒子*/
+
+        .two {
+            width: 300px;
+            height: 100px;
+            background-color: plum;
+        }
+
+        .two p {
+            padding: 30px;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="one">
+        padding会影响盒子大小
+        padding会影响盒子大小
+        padding会影响盒子大小
+    </div>
+
+    <div class="two">
+        <p></p>
+    </div>
+</body>
+
+</html>

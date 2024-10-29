@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        const gift = '50g的茶叶,清洗球'
+        // 把字符串转换成数组
+        // const arr = gift.split(',')
+        // 根据数组个数生成对应的span标签
+        // const arr2 = gift.split(',').map(item => `<span>【赠品】${item}</span>`)
+        // console.log(arr2)
+        // console.log(gift.split(',').map(item => `<span>【赠品】${item}</span>`).join(''))  //join默认以','做分隔，这里空分隔装到div里面
+        //数组转换成字符串渲染到div
+        document.querySelector('div').innerHTML = gift.split(',').map(item => `<span>【赠品】${item}</span>`).join('')
+
+        const obj = {
+            name: '哈喽',
+            age: 18
+        }
+        for (let k in obj) {
+            console.log(k)
+            console.log(obj[k])
+        }
+    </script>
+</body>
+
+</html>

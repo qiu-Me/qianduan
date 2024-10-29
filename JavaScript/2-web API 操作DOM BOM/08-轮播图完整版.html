@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            .slider {
+                position: relative;
+                width: 500px;
+                height: 380px;
+                background-color: brown;
+                margin: 0 auto;
+            }
+
+            .slider-wrapper {
+                width: 100%;
+                height: 320px;
+            }
+
+            .slider-wrapper img {
+                width: 100%;
+                height: 320px;
+            }
+
+            .slider-footer {
+                width: 100%;
+            }
+
+            .slider-footer p {
+                height: 40px;
+                text-align: center;
+                line-height: 40px;
+                color: #fff;
+            }
+
+            .slider-footer ul li {
+                display: inline-block;
+                margin: 5px 5px 0;
+                list-style: none;
+                width: 10px;
+                height: 10px;
+                border: 1px solid #000;
+                border-radius: 5px;
+            }
+
+            .active {
+                background-color: #fff;
+            }
+
+            .toggle {
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+                height: 40px;
+                width: 100px;
+            }
+
+            .toggle button {
+                width: 40px;
+                height: 40px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="slider">
+            <div class="slider-wrapper">
+                <img src="images/1.webp" alt="">
+            </div>
+            <div class="slider-footer">
+                <p>这是小王子</p>
+                <ul class="slider-indicator">
+                    <li class="active"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="toggle">
+                <button class="prev">&lt;</button>
+                <button class="next">&gt;</button>
+            </div>
+        </div>
+        <script>
+            const sliderData = [
+                { url: 'images/1.webp', title: '这是小王子' },
+                { url: 'images/2.webp', title: '绿色的恐龙' },
+                { url: 'images/3.webp', title: '是一个美女' },
+                { url: 'images/4.webp', title: '小猫猫' },
+                { url: 'images/5.webp', title: '小王子吃鸡腿' },
+                { url: 'images/6.jpg', title: '富有派大星' },
+                { url: 'images/7.webp', title: '玩偶派大星' },
+                { url: 'images/8.webp', title: '被捏脸脸的狗狗' }
+            ]
+
+            const img = document.querySelector('.slider-wrapper img')
+            const p = document.querySelector('.slider-footer p')
+
+
+            //1.右按钮业务
+            const next = document.querySelector('.next')
+            let i = 0
+            next.addEventListener('click', function () {
+                i++
+                //回溯
+                if (i > sliderData.length) {
+                    i = 0
+                }
+                toggle()
+                img.src = sliderData[i].url
+            })
+            //2.左边按钮
+            const prev = document.querySelector('.prev')
+            prev.addEventListener('click', function () {
+                i--
+                if (i < 0) {
+                    i = sliderData.length
+                }
+
+                toggle()
+            })
+            //声明一个渲染的函数作为复用
+            function toggle() {
+                img.src = sliderData[i].url
+                p.innerHTML = sliderData[i].title
+                //不加点
+                // let active = document.querySelector('.slider-indicator .active')
+                // active.classList.remove('active')
+                document.querySelector('.slider-indicator .active').classList.remove('active')
+                //不要忘了反引号里加${变量}
+                document.querySelector(`.slider-indicator li:nth-child(${i + 1})`).classList.add('active')
+            }
+
+            //3.自动播放模块
+            let timerId = setInterval(function () {
+                //利用js自动调用点击事件 click() 一定要加小括号调用函数
+                next.click()
+            }, 1000)
+            //4. 鼠标经过大盒子计时器停止
+            const slider = document.querySelector('.slider')
+            //注册事件
+            slider.addEventListener('mouseenter', function () {
+                //停止计时器
+                clearInterval(timerId)
+            })
+            // 5.鼠标离开大盒子开启定时器
+            slider.addEventListener('mouseleave', function () {
+                //开启定时器前一定要先停止
+                clearInterval(timerId)
+                //开启定时器
+                timerId = setInterval(function () {
+                    next.click()
+                }, 1000)
+            })
+        </script>
+    </body>
+</body>
+
+</html>

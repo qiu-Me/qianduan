@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        /*
+            // 变量声明 const优先 值不发生变化时用const 发生变化用let
+            const arr = ['pink', 'sdfs', 'asd']
+            arr.push('sadfes') //不报错 因为 arr是记录的数组地址 是不变的 改变的是数组里面的值 同理 对象也是
+            
+            web API的基本认识
+                作用和分类
+                作用：使用js去操作html和浏览器
+                分类：DOM 和 BOM
+    
+                DOM
+                    DOM：文档对象类型，呈现和与任意html或xml文档 交互 的API，即浏览器提供的专门 操作网页内容 的功能
+                    DOM树：把html文档以树状结构呈现出来 所有的便签在js里面都是对象 在DOM里面最大的对象是document
+                        例如：
+                        const div = document.querySelector('div')
+                        //打印对象
+                        console.dir(div)
+                        typeof(div) //object 对象
+                    
+                    获取DOM元素
+                        根据css选择器获取DOM元素（重点）
+                        1.
+                        <body> //方便查看所以在script里面写了body
+                            <div class="box">123</div>
+                            <div id="box">abc</div>
+                        </body>     
+                        // querySelector 查询选择器 只选择第一个div 没有匹配返回null
+                        const box = document.querySelector('div')// const box = document.querySelector('.box') 
+                        console.log(box)
+                        const box = document.querySelector('#box')
+                        可以直接修改
+                        div.style.color = 'red'
+                        2.
+                        <body> 
+                            <ul>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </body>
+                        //想要所有的 querySelectorAll 不能直接修改样式
+                        const lis = document.querySelectorAll('ul li')
+                        console.log(lis) //返回所有ul里面的li 得到伪数组 如 lis = [li,li,li] 但不是真数组因为没有增删查改
+                        //遍历 依次获取每个li 即使ul只有一个元素 但使用了querySelectorAll 也只能遍历获取
+                        for (let i = 0 ; i < lis.length ; i++){
+                            console.log(lis[i])
+                        }
+    
+                    修改元素内容：
+                    1.对象.innerText(属性)
+                        const box = document.querySelector('.box')
+                        console.log(box.innerText) //获取文字内容
+                        box.innerText = '我是一个盒子'
+                        box.innerText = '<strong>我是一个盒子</strong>' //不变粗  不解析便签
+                        //特点：1.将文本内容添加/更新到任意便签位置
+                                2.显示纯文本 不解析便签
+                    2.innerHTML 解析标签
+                        box.innerText = '<strong>我要更换</strong>' //变粗 解析标签
+                    
+                    修改元素属性：
+                    1.常用属性
+                        //（1）获取元素
+                        const img = document.querySelector('img')
+                        //(2)修改
+                        img.src = '...'
+                    2.样式属性
+                        （1）style属性操作css 生成行内样式 权重高
+                            1.1
+                            const box = document.querySelector('.box')
+                            box.style.width = '300px' //别忘了单位
+                            //多组单词采取 小驼峰命名法
+                            box.style.backgroundColor = 'pink'
+    
+                            1.2
+                            //body里面
+                            body {
+                                background-image: url('images/1.png')
+                            }
+                            //js
+    
+                            //取随机整数
+                            function getRandom(N,M){
+                                return Math.floor(Math.random() * (M - N +1)) + N
+                            }
+                            //随机数
+                            const random = getRandom(1,10)
+                            //要用反引号
+                            document.body.style.backgroundImage = `url(image/${random}.png)`
+    
+                        （2）类名(className)操作css
+                            //在body里面
+                            <div class="nav"></div>
+                            //在style里面
+                            .box {
+                                width:100px;
+                                height: 100px;
+                                background-color: pink;
+                            }    
+                            //js
+                            const div = document.querySelecyor('div')
+                            div.className = 'box' 
+                            //相当于在body里面写上 <div class='box'></div> 不要写“.” 
+                            //会覆盖掉nav 如果两个都想要的话就写 div.className = 'nav box'
+    
+                        （3）classList操作类控制css(经常用)
+                            //body
+                            <div class="box"></div>
+                            //style
+                            .box {
+                                width: 100px;
+                                height: 100px;
+                                color: #ccc;
+                            }
+                            .active {
+                                color: red;
+                                background-color: pink;
+                            }
+                            //script
+                            const box = document.querySelector('.box')
+                            //add() 追加类 
+                            box.classList.add('active') 
+                            //remove() 删除类  
+                            box.classList.remove('box')
+                            //toggle() 切换类：原来有就删掉 没有就加上
+                            box.classList.toggle('active')
+                    3.修改表单元素 (特殊)
+                    //body
+                    <input type="text" value="电脑">
+                    //script
+                    //获取元素
+                    const uname = document.querySelector('input')
+                    //获取值 表单名.value
+                    console.log(uname.value) //innnerHTML不能修改表单元素内容
+                    //设置值
+                    uname.type = 'password'
+                    uname.value = '我要买电脑'
+                    
+                    //3.1
+                        //body 复选框
+                        <input type="checkbox" name="" id="">
+                        //默认勾选
+                        // <input type="checkbox" name="" id="" checked="checked"
+                        
+                        //script
+                        //获取
+                        const ipt = document.querySelector('input')
+                        //通过js默认勾选复选框 checked的值是布尔值
+                        ipt.checked = true 
+                        //ipt.checked = 'true' 也会勾选上 因为只要不是表示false的就是true 但不提倡 有隐式转换
+    
+                        //body 按钮
+                        <button></button>
+                        //禁用
+                        // <button disabled></button>
+    
+                        //script
+                        const button = document.querySelector('button')
+                        button.disabled //disabled默认值是false 不禁用
+                        button.disabled = true //禁用
+                    自定义属性
+                    //body 
+                    //必须 data-自定义名字
+                    <div data-id="1" data-sgm="自定义"></div>
+                    <div data-id="1"></div>
+                    <div data-id="1"></div>
+                    <div data-id="1"></div>
+                    
+                    //script
+                    const div = document.querySelector('div')
+                    //dataset 对象
+                    console.log(div.dataset.id) //1
+                    console.log(div.dataset.sgm) //自定义
+    
+                    定时器-间歇函数
+                        开启定时器
+                            //setInterval(函数, 间歇时间(毫秒))
+                            setInterval(function (){
+                                console.log('一秒执行一次')
+                            },1000)
+                            //第二种
+                            function fn(){
+                                console.log('一秒执行一次')
+                            }
+                            //setInterval(函数名,间隔时间)  函数名不加小括号
+                            setInterval(fn , 1000)
+                            //如果非要加则
+                            // setInterval('fn()',1000)
+                            let n = setInterval(fn,1000) //n=2 每个定时器都是第一无二的 开关会改变n值所以用let
+                            //或者
+                            let n = setInterval(function (){
+                                    console.log('一秒执行一次')
+                                },1000)
+                            
+                            //关闭定时器
+                            clearInterval(n)
+                            //第二次开
+                            n = setInterval(fn, 1000)
+    
+                    事件监听——有响应发生
+                        元素对象.addEventListener('事件类型',要执行的函数)
+                        事件监听三要素：
+                            事件源(谁被触发了 button 文本框...)
+                            事件类型(用什么方式触发 点击 鼠标经过...)
+                            事件处理程序(要做什么事 弹出对话框 显示下拉框)
+                    
+                   事件类型
+                        鼠标经过事件：
+                            div.addEventListener('mouseenter',function(){
+                                console.log('我来了')
+                            })
+                            div.addEventListener('mouseleave',function(){
+                                console.log('我走了')
+                            })
+                        焦点事件：
+                            css中：input:focus {
+                                width:200px;
+                            }  //选择聚焦的input 让其宽度变为200px
+    
+                            script中:
+                            input.addEventListener('focus',function(){
+                                console.log('触发焦点')
+                            })
+                            input.addEventListener('blur',function(){
+                                console.log('触发失去焦点')
+                            })
+                        键盘事件:
+                            input.addEventListener('keydown',function(){
+                                console.log('键盘按下')
+                            })
+                            input.addEventListener('keyup',function(){
+                                console.log('键盘抬起')
+                            })
+                        用户输入文本事件 input
+                            input.addEventListener('input',function(){
+                                console.log(input.value)
+                            })
+                    事件对象
+                        函数的第一个参数就是事件对象----e(可以随便写名字,当建议写e)
+                        元素.addEventListener('click',function(e){  })
+                        属性
+                            type 获取当前事件类型
+                            clientX/clientY 获取相对于浏览器可见窗口左上角位置
+                            offsetX/offsetY 获取相对于当前DOM元素左上角位置
+                            key 用户按下键盘的值 不提倡使用keyCode
+    
+                            例子:
+                            input.addEventListener('keyup',function(e){
+                                // console.log(e.key)
+    
+                                if (e.key === 'Enter'){
+                                    console.log('我按下了回车键')
+                                }
+                            })
+                        环境对象:this 每个函数都有this (重点)
+                            普通函数里面的this指向window
+                            谁调用 this就指向谁
+                        回调函数
+                            函数A作为函数B的参数,我们称A为会回调函数
+                            例如:
+                                input.addEventListener('keyup',function(){ })
+                                此时function()为回调函数A,addEventListener()是函数B
+                        注意复选框css属性:
+                            .ck:checked {
+                                width: 200px
+                            } //让被勾选的复选框宽度变为200px
+                    事件流
+                        捕获阶段:从大到小 从外到里 document -- html--  body--  div
+                        冒泡阶段: 从小到大
+    
+                        事件捕获例子：
+                            html:
+                                <div class="father">
+                                    <div class="son"></div>
+                                </div>
+                            script:
+                                const fa = document.querySelector('.father')
+                                const son = document.querySelector('.son')
+    
+                                document.addEventListener('click',function(){
+                                    alert('我是爷爷')
+                                },true)
+                                fa.addEventListener('click',function(){
+                                    alert('我是爸爸')
+                                },true)
+                                son.addEventListener('click',function(){
+                                    alert('我是儿子')
+                                },true)
+                            结果: 当点击son时，依次弹出‘我是爷爷’ ‘我是爸爸’ ‘我是儿子’
+                                    证明了捕获阶段是从大到小查找
+                        
+                        事件冒泡例子: 还是上面的代码，将true删除不写默认是false 为冒泡
+                                当点击son时，依次弹出‘我是儿子’ ‘我是爸爸’ ‘我是爷爷’
+                                证明了冒泡是从小到大依次向上调用所有父级的 同名事件（‘click’）
+                        
+                        阻止冒泡：
+                            当前事件对象.stopPropagation()
+                                son.addEventListener('click',function(e){
+                                        alert('我是儿子')
+                                        //阻止流动传播
+                                        e.stopPropagation()
+                                    })
+                                结果：只弹出‘我是儿子’
+                        阻止默认行为：
+                            当前事件对象.preventDefault
+                                form.addEventListener('submit',function(e){
+                                    //阻止默认行为：提交
+                                    e.preventDefault    
+                                })
+    
+                        解绑事件：
+                            L0：只有冒泡没有捕获
+                                btn.onclick = function() {
+                                    alert('点击了')
+                                    //弹出一次解绑
+                                    //btn.onclick = null
+                                }
+                                //一次都不弹出解绑
+                                btn.onclick = null
+    
+                            Lv2:
+                                btn.addEventListener('click',function(){
+                                    alert('点击了')
+                                })
+                                以上匿名函数不能被解绑
+    
+                                function fn(){
+                                    alert('点击了')
+                                }
+                                //一次都没被执行
+                                btn.addEventListener('click',fn)
+                                btn.removeEventListener('click',fn)
+                            鼠标经过事件：
+                                mouseover和mouseout 有 冒泡效果
+                                mouseenter和mouseleave 没有 冒泡效果（推荐）
+                    事件委托：
+                        原理：利用冒泡冒到父亲身上 触发父亲事件
+                        委托给父元素
+                        body：
+                            <ul>
+                                <li>第1个孩子</li>
+                                <li>第2个孩子</li>
+                                <li>第3个孩子</li>
+                                <li>第4个孩子</li>
+                                <li>第5个孩子</li>
+                                <p>我不需要变色</p>
+                            </ul>
+                        script：
+                            获取了元素
+                            ul.addEventListener('click',functioon(e){
+                                //e.target就是点击的那个子对象
+                                // e.target.style.color = 'red' 对p标签依旧有效
+                                //tagName 选择同类型的子标签
+                                if(e.target.tagName = 'LI') {
+                                    e.target.style.color = 'red'
+                                }
+    
+                            })
+                    页面加载事件：
+                        加载外部资源完毕时触发事件 load window
+                        js写在上面 title下面
+                        //页面加载事件
+                        window.addEventListener('load',function(){
+                            const btn = document.querySelector('button')
+                            btn.addEventListener('click',function(){
+                                alert(11)
+                            })
+                        })
+                        等不及了 html(标签....)文档被加载解析完 DOMContentLoaded document
+                        document.addEventListener('DOMContentLoaded',function(){
+                            const btn = document.querySelector('button')
+                            btn.addEventListener('click',function(){
+                                alert(11)
+                            })
+                        })
+                    页面滚动事件
+                        window.addEventListener('scroll',function(){
+                            console.log('我滚了')
+                        })
+    
+                        属性： scrollTop scrollLeft
+                        scrollTop:一个盒子里面的内容盒子由于滚动条下拉 文字向上移动 超过盒子的上面部分的超出距离
+                        可读写 不带单位
+                        document.documentElement.scrollTop = 800
+                        
+                        window.addEventListener('scroll',function(){
+                            //获取html元素写法 必须写到这里面不断获取最新的值 获取页面滚动了多少像素
+                            // console.log(document.documentElement.scrollTop)
+                            const n = document.documentElement.scrollTop
+                            //顶部超过100就显示
+                            if (n>=100){
+                                div.style.display = 'block'
+                            }
+                            else {
+                                div.style.display = 'none'
+                            }
+                            //返回顶部
+                            // 1.
+                            // document.documentElement.scrollTop = 0
+                            // 2.window.scrollTo(x,y) 
+                            window.scrollTo(0,0) 
+                        })
+                    页面尺寸事件
+                        页面缩放
+                        window.addEventListener('resize',function(){})
+                        检测页面尺寸大小
+                        获取元素宽高 不包含边框 clientWidth clientHeight
+                        console.log(div.clientWidth)
+                        console.log(div.clientHeight)
+                    
+                    元素的尺寸与位置
+                        获取元素宽高 包含padding border 获取的是可视的如果盒子隐藏则结果为0
+                        offsetWidth offsetHeight
+                        获取位置 元素距离自己最近一级带 有定位 的祖先元素的左、上距离
+                        offsetLeft offsetTop 只读属性
+    
+                    日期对象  得到当前系统时间
+                        实例化：
+                            new关键字
+                            获取当前时间：const time = new Date()
+                            获取指定时间：const time1 = new Date('2022-5-1 08:30:00')
+                        日期对象的方法：
+                            //1、获取日期对象
+                            const date = new Date()
+                            //2、使用里面的方法
+                            console.log(date.getFullYear())
+                            console.log(date.getMonth() + 1)//从0开始所以要加1
+                            
+    
+                            方法：
+                                getFullYear()       获取四位年份
+                                getMonth()          获取月份 0~11 
+                                getDate()           获取月份中的每一天，不同月份取值不同
+                                getDay()            获取星期 0~6
+                                getHours()              小时 0~23    
+                                getMinutes()            分钟 0~23    
+                                getSeconds()            秒 0~59    
+                                
+                        时间戳：
+                            1970年01月01日00时00分00秒开始到现在的 毫秒数
+                            倒计时： 
+                                将来的毫秒数 - 现在的毫秒数 = 剩余的毫秒数
+                                1000ms = 1s
+                            获得时间戳的方法：
+                                1.
+                                    getTime()
+                                    console.log(date.getTime()) 
+                                2.重点记
+                                    +new Date() 
+                                    console.log(new Date()) 获取当前的时间 字符串形式 
+                                    console.log(+new Date()) 将字符串转换成了数字型 如+‘1’ = 1 
+                                3.当前的时间戳
+                                    Date.new()
+                                    console.log(Date.new()) 
+                
+                    节点操作：
+                        DOM节点：
+                            DOM树每个内容称为节点
+                            元素节点（重点）：
+                                所有标签body p...
+                            属性节点：
+                                所有属性 href class...
+                            文本节点：
+                                所有文本
+                            其他
+                        查找节点：返回的还是对象
+                            父节点 （亲爸爸）
+                                子元素.parentNode
+                            子节点
+                                childNodes 获取所有的子节点包括文本节点注释节点等
+                                children（重点）得到伪数组 亲儿子 
+                                    父元素.children
+                            兄弟节点
+                                上一个兄弟：nextElementSibling
+                                下一个兄弟：previousElementSibling
+                        
+                        增加节点：
+                            创建
+                                document.createElement(元素节点)
+                            插入 
+                                插入（追加）到子元素最后
+                                    父元素.appendChild(要插入的元素)
+                                    document.appendElement('div')
+                                插入到子元素之前 (而不是最前)
+                                    父元素.insertBefore(要插入的元素，在哪个元素前面)
+                                    例如：
+                                        body：
+                                            <ul>
+                                                <li>1</li>
+                                                <li>3</li>
+                                            </ul>
+                                        script:  
+                                            const ul = document.querySelector('ul')
+                                            const li1 = document.createElement('li')
+                                            li1.innerHTML = '2'
+                                            ul.insertBefore(li1, ul.children[1])
+                                    结果是123   
+                        克隆节点：
+                            元素.cloneNode(true) true是深克隆:内容颜色等等都克隆下来，连子代的孩子、孙子都克隆下来
+                            ul.appendChild(ul.children[0].cloneNode(true))
+                        删除节点：
+                            必须通过父元素删除 亲的爸爸
+                            父元素.removeChild(要删除的元素)
+                            注意：display: none;是隐藏节点 并没有删除 而removeChild是从html中彻底删除
+                                    
+                    M端事件：
+                        常见的M端事件： 移动端的触屏事件(touch)
+    
+                        触摸：
+                            touchstart 开始触摸
+                            touchend   触摸结束
+                            touchmove  滑动
+                    
+                    js插件:
+                        18-移动端轮播图
+    
+                
+    
+                Window对象（BOM）
+                    
+                    BOM是浏览器对象模型
+                    定时器——延时函数：执行一次 setTimeout(回调函数,多少秒后执行)
+                        清除延时函数：clearTimeout(延时函数名)
+                        返回值为 第几个定时器 id
+    
+                    JS执行机制
+                        例：
+                            输出结果是多少？ 111 333 222
+                            console.log(111)
+                            setTimeout(function(){
+                                console.log(222)
+                            },3000)
+                            console.log(333)
+    
+                            输出结果是多少？ 111 333 222
+                            console.log(111)
+                            setTimeout(function(){
+                                console.log(222)
+                            },0)
+                            console.log(333)
+                        js一大特点：单线程 同一个时间只能做一件事
+                        为了解决这个问题 利用多核cpu的计算能力，HTML5提出web worker标准 允许javaScript脚本创建多个线程，于是js出现了同步和异步
+                        同步：前一个任务结束后再执行后一个任务，程序的执行顺序与任务的排列顺序一致。
+                            同步任务都在主线程执行，形成一个 执行线
+                        异步：
+                            异步任务通过回调函数实现，添加到 任务队列 中。
+                            1、普通时间，click、resize等
+                            2、资源加载，load、error等
+                            3、定时器，包括setInterval、setTimeout等
+                        
+                        事件循环（event loop）：由于主线程不断重复获得任务、执行任务、再获取任务、再执行 的一种机制
+                        1、先执行 执行栈 中的同步任务
+                        2、异步任务放在 任务队列中
+                        3、执行栈中的同步任务都执行完毕，系统读取任务队列中的异步任务（等待状态）之后，进入执行栈开始执行
+                    location对象：
+                        常用属性 
+                            跳转 location.href = '网址'
+                            location.hash
+                                例如：<a href='#/my'>我的</a> 此时location.hash 再点击我的 就会的得到'#/my'
+                        方法
+                            刷新页面 reload()
+                                button.addEventListener('click',function(){
+                                    location.reload()
+                                    // 强制刷新 reload(true) ctrl+f5
+                                    // location.reload(true)
+                                })
+                    navifator对象和histroy对象：
+                        navifator对象
+                        检测userAgent（浏览器信息）
+                            立即执行函数
+                            (function(){
+                                const userAgent = navigator.userAgent
+                                // 验证是否为Android或Phone
+                                const android = userAgent.match(/(Android);?[\s\/]+([\d.]+)?/)
+                                const iphone = userAgent.match(/(iPhone\sOS)\s([\d_]+)/)
+                                // 如果是安卓或者爱疯就跳转到移动端
+                                if(android || iphone){
+                                    location.href = 'http://m.itcast.cn'
+                                }
+                            })();
+                        histroy对象
+                            前进一步  histroy.back()  或着  histroy.go(-1)
+                            后退一步  histroy.forward()   或着  histroy.go(1)
+                
+                本地存储
+                    可以理解为浏览器的数据库 页面刷新不丢失数据 容量大：sessionStorage和localStorage约5M左右
+                    本地存储分类——localStorage   键值对
+                        语法： localStorage.setlem(key,value)
+                        // 1.存储 
+                        localStorage.setItem('uname', '.hh')
+                        // 2.获取方式 都要加引号
+                        console.log(localStorage.getItem('uname'))
+                        // 3.删除 
+                        localStorage.removeItem('uname')
+                        // 4.改 如果有就是改 没有就是增加
+                        localStorage.setItem('uname', '.hq')
+    
+                        本地存储只能存储得到字符串类型
+    
+                        localStorage.setItem('age',18)
+                        18会被转成字符串
+                    本地存储分类——setsionStorage
+                        关闭浏览器就没了 使用方法与localStorage一致
+                    
+                    存储复制数据类型
+                            const obj = {
+                            uname: '.hh',
+                            age: 18,
+                            gender: '女'
+                        }
+                        // 存储 复杂数据类型 无法直接使用  结果为 [object objec]
+                        // localStorage.setItem('obj',obj) 
+    
+                        // 解决方法 复杂数据类型存储必须转换为 JSON字符串存储
+    
+                        localStorage.setItem('obj', JSON.stringify(obj))
+                        // JSON 对象 属性和值都有引号 用以为双引号
+                        // {"uname":".hh","age":18,"gender":"女"}
+    
+                        //取
+                        console.log(localStorage.getItem('obj'))//字符串类型
+                        // 2.把JSON字符串转换为 对象 
+                        console.log(JSON.parse(localStorage.getItem('obj')))
+    
+                数组map和joi方法
+                    const arry = ['red', 'blue', 'pink']
+    
+                    //1.数组map方法 map也称为映射,只两个元素之间有'对应'的关系 map重点子啊与有返回值 forEach没有
+                    const newArr = arry.map(function (ele, index) {
+                        // ele是数组元素  index是索引号
+                        return ele + '颜色'
+                    })
+                    console.log(newArr) // ['red颜色','blue颜色','pink颜色']
+    
+                    //2.join方法 把数组中所有元素转换成一个字符串
+                    // 小括号为空 则以逗号分隔
+                    console.log(newarr.join())  //red颜色,blue颜色,pink颜色
+                    // 小括号为空字符集则没有分隔符
+                    console.log(newarr.join(''))    //red颜色blue颜色pink颜色
+                    console.log(newarr.join('|'))   //red颜色|blue颜色|pink颜色
+                
+                正则表达式
+                    介绍：
+                        用于字符串中字符组合的****模式**** ，正则表达式也是对象
+                        用来查找、替换符合正则表达式的文本  过滤掉网页内容一些敏感词(替换)，获取特定部分(提取)
+                    语法：
+                        定义正则表达式语法：
+                            const 变量名 = /表达式/
+                            例如： 
+                                const str = '我是.hh，我喜欢前端'
+                                const reg = /前端/
+    
+                        判断是否有符合规则的字符串
+                            test() 匹配则返回true 否则false
+                            规则.test(被检测的字符串) 
+                            例如：
+                                console.log(reg.test(str)) //true 
+                        
+                        查找符合字符串
+                            exec() 匹配成功返回数组 否则返回null
+                            例如：
+                                console.log(reg.exec(str)) 
+                                //[0:"前端",groups: undefined,index: 9,input:"我是.hh，我喜欢前端",length: 1]  
+                    
+                    元字符：
+                        特殊字符 26个字母可以写成 [a-z]
+                        再比如 [a-zA-Z0-9]
+                        灵活简单
+                        边界符：
+                            表示位置 开头^ 和 结尾$ 必须以什么开头用什么结尾
+                            例：
+                                (/^哈/).test('哈喽') //以哈开头 true
+                                (/哈$/).test('哈喽') //以哈结尾 false
+                                (/^哈$/).test('哈')  //精确匹配 以哈开头以哈结尾 只能有一个哈 true
+                                (/^哈$/).test('哈哈')  //false
+                        
+                    
+                        量词：
+                            表示重复次数 
+                            用来设置某个模式出现的次数
+                                量词        说明                        类似            例子 true
+                                *          重复0次或更多次               >=0       (/^哈*$/).test('哈哈') 
+                                +          重复一次或更多次               >=1        (/^哈+$/).test('哈哈哈') 
+                                ?          重复0次或1次                  0 || 1      (/^哈?$/).test('哈') 
+                                {n}         重复n次                       n         (/^哈{5}$/).test('哈哈哈哈哈') 
+                                {n,}        重复n次或更多次               >=n        (/^哈{3}$/).test('哈哈哈哈') 
+                                {n,m}       重复n到m次（逗号左右不能有空格）>=n && <=m  (/^哈{2,4}$/).test('哈哈哈') 
+                            
+                            注意： 重复前面一个最近的 比如 QQ号：^[1-9][0-9]{4,}  重复4次以上的时[0-9]这个范围的数          
+                        字符类：
+                            比如\d 表示0~9
+                                                                                               true                                     false
+                            []      匹配字符类      匹配所包含的任意个字符      /[abc]/).test('absdfswe')、(/[abc]/).test('ab')   
+                                                   精确匹配后‘只能’出现其中一个            (/^[abc]$/).test('a')                        (/^[abc]$/).test('ab')                                                                       
+                                                    精确匹配+量词允许重复出现              (/^[abc]{2}$/).test('ab') 
+                            
+                            注意： []里面加 ^ 是取反  比如[^a-z] 匹配除了小写字母之外的字符
+
+                            .       匹配除换行符之外的任何单个字符
+                            常见模式的简写模式：              大写都是取反
+                            \d          [0-9]                   \D      [^0-9]
+                            \w          [A-Za-z0-9]
+                            \s          匹配空格[\t\r\n\v\f]                                  
+                    修饰符：
+                        细节修饰正则表达式
+                            i            匹配时不区分大小写         /^'java'$/i.test('JAVA') true
+                            g              全局匹配满足条件  
+                            
+                            replace         替换                    字符串.replace(/正则表达式/,'替换文本')       
+    */
+    </script>
+</body>
+
+</html>

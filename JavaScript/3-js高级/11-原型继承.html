@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // const Person = {
+        //     eays: 2,
+        //     head: 1
+        // }
+        function Person() {
+            this.eays = 1
+            this.head = 2
+        }
+        function Woman() {
+            // this.eays = 2
+            // this.head = 1
+        }
+        // Woman继承Person
+        Woman.prototype = new Person
+        // 指回原来的构造函数
+        Woman.prototype.constructor = Woman
+        // 给所有女人添加生孩子方法 这样Man也有 因为引用都是Person的
+        Woman.prototype.baby = function () {
+            console.log('宝贝')
+        }
+
+        const red = new Woman()
+        console.log(red)
+
+        function Man() {
+            // this.eays = 2
+            // this.head = 1
+        }
+        // Man继承Person
+        Man.prototype = new Person
+        Man.prototype.constructor = Man
+        const blue = new Man()
+        console.log(blue)
+
+
+    </script>
+</body>
+
+</html>

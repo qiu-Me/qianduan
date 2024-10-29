@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        div {
+            /* 背景颜色： */
+            background-color: transparent;
+            /*透明的 还可以改成其他颜色*/
+
+            /* 背景图片 */
+            width: 500px;
+            height: 500px;
+
+            /* 不要落下 url() */
+            background-image: url(-4b98037cb6087568.jpg);
+            /* 背景图片不平铺 默认图片都是平铺*/
+            background-repeat: no-repeat;
+            /* repeat-x：沿x平铺 repeat-y：沿y平铺*/
+            /* 页面元素既可以添加背景颜色也可以添加背景图片 只不过背景图片会压制背景颜色 */
+            /* 背景图片位置 */
+            /* background-position: 方位名词:center,right,center right,.....跟前后顺序没关系 */
+            background-position: center;
+
+            /* 混合单位 精确方位 有顺序关系x y*/
+            background-position: 20px 50px;
+            /* 如果是20px: x=20px,y=center*/
+
+
+        }
+
+        body {
+            /* background-image: url(bg.webp);
+            background-repeat: no-repeat;
+            background-position: center top; */
+            /* 把背景图片固定:fixed 背景图像随对象内容而滚动：scroll  */
+            /* background-attachment: fixed; */
+
+            /* 简写 background：背景颜色 背景图片地址 背景平铺 背景图像滚动 背景图片位置 */
+            /* 顺序可以乱 */
+            background: black url(bg.webp) no-repeat fixed center top;
+
+            color: #fff;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>盒子</div>
+    <p>哈喽，我是.hh</p>
+    <p>哈喽，我是.hh</p>
+    <p>哈喽，我是.hh</p>
+    <p>哈喽，我是.hh</p>
+    <p>哈喽，我是.hh</p>
+    <p>哈喽，我是.hh</p>
+    <p>哈喽，我是.hh</p>
+    <p>哈喽，我是.hh</p>
+    <p>哈喽，我是.hh</p>
+    <p>哈喽，我是.hh</p>
+    <p>哈喽，我是.hh</p>
+    <p>哈喽，我是.hh</p>
+    <p>哈喽，我是.hh</p>
+    <p>哈喽，我是.hh</p>
+    <p>哈喽，我是.hh</p>
+    <p>哈喽，我是.hh</p>
+</body>
+
+</html>

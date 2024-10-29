@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+
+
+
+        .tab {
+            margin: 100px auto 0;
+            width: 200px;
+        }
+
+        .tab ul {
+            display: flex;
+            width: 100%
+        }
+
+        li {
+            list-style: none;
+            flex: 1;
+        }
+
+        .tab-content {
+            margin: 0 auto;
+            width: 200px;
+            height: 200px;
+        }
+
+        .item {
+            display: none;
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            font-size: 30px;
+        }
+
+        .active {
+            display: block;
+            border-color: red;
+            color: red;
+        }
+
+        .item:nth-child(1) {
+            background-color: skyblue;
+        }
+
+        .item:nth-child(2) {
+            background-color: pink;
+        }
+
+        .item:nth-child(3) {
+            background-color: oldlace;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tab">
+        <ul>
+            <li><a class="active" href="javascript:;">精选</a></li>
+            <li><a href="javascript:;">美食</a></li>
+            <li><a href="javascript:;">百货</a></li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div class="item active">我是精选</div>
+        <div class="item">我是美食</div>
+        <div class="item">我是百货</div>
+    </div>
+
+    <script>
+        //a模块制作 给3个链接鼠标经过事件
+        //querySelectorAll 获取到的是数组
+        const as = document.querySelectorAll('.tab a')
+        const it = document.querySelectorAll('.tab-content .item')
+        // console.log(as)
+        for (let i = 0; i < as.length; i++) {
+            as[i].addEventListener('mouseenter', function () {
+                //移除别人
+                document.querySelector('.tab .active').classList.remove('active')
+                //添加自己
+                this.classList.add('active')
+                //显示对应的div
+                //干掉别人
+                document.querySelector('.tab-content .active').classList.remove('active')
+                //留下自己
+                document.querySelector(`.tab-content .item:nth-child(${i + 1})`).classList.add('active')
+            })
+        }
+    </script>
+</body>
+
+</html>

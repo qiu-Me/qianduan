@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 属性选择器 也有权重 类选择器，伪类选择器，属性选择器权重都是10 */
+
+        /*1.  下面意思：必须是input同时具有value属性 选择这个元素 */
+        input[value] {
+            color: pink;
+        }
+
+        /* 2. 只选择type=text属性修改*/
+        input[type=text] {
+            color: blue;
+        }
+
+        /* .one {
+            color: red;
+        } */
+
+        /* div是属性选择器 [class^=box]是类选择器 权重之和为11 */
+        /* 3. 先选择div 然后 具有class属性 并且属性值 必须是box开头的这些元素*/
+        div[class^=box] {
+            color: green;
+        }
+
+        /* 4. */
+        section[class$=data] {
+            color: red;
+        }
+
+        /* 5.任意值 */
+        /* div[class*="某个字段"] */
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+    <!-- 属性选择器 -->
+    <!--1. 利用属性选择器就可以不借用类选择器和id选择器 -->
+    <input type="text" value="请输入用户名" class="one">
+    <input type="text">
+
+    <!-- 2.属性选择器还可以选择属性=值得某些元素 重点无比掌握 -->
+    <input type="text" name="" id="">
+    <input type="password" name="" id="">
+
+    <!-- 3.选择属性值开头得某些元素 -->
+    <div class="box1">图标1</div>
+    <div class="box2">图标2</div>
+    <div class="box3">图标3</div>
+    <div class="box4">图标4</div>
+    <div class="hh">5</div>
+
+    <!-- 4.选择属性值结尾得某些元素-->
+    <section class="icon1-data">.hh一号</section>
+    <section class="icon2-data">.hh二号</section>
+    <section class="icon3-ico">.hh三号</section>
+
+    <!-- 5.任意值 -->
+
+    <!-- ...... -->
+
+
+
+
+
+
+
+</body>
+
+</html>

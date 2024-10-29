@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin: 50px;
+            text-align: center;
+        }
+
+        input {
+            width: 100px;
+        }
+
+        select {
+            width: 50px;
+        }
+
+        .add {
+            background-color: skyblue;
+            width: 50px;
+            border-radius: 7px;
+        }
+
+        .title {
+            margin: 50px auto;
+            width: 800px;
+            height: 30px;
+            background-color: #eee;
+            text-align: end;
+        }
+
+        span {
+            display: inline-block;
+            margin: 5px;
+            text-align: center;
+            width: 90px;
+            height: 20px;
+            font-size: 12px;
+        }
+
+        b {
+
+            font-weight: normal;
+            color: orange;
+        }
+
+        table {
+            margin: 50px auto;
+            text-align: center;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: #eee;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            display: inline-block;
+            width: 150px;
+            font-size: 12px;
+        }
+
+        td {
+            border: 1px solid #ccc;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .dalet {
+            background-color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>新增学员</h1>
+    <!-- autocomplete="off"关闭以前输入的信息显示 -->
+    <form class="info" autocomplete="off">
+        姓名:
+        <input type="text" class="uname" name="uname">
+        年龄:
+        <input type="text" class="age" name="age">
+        性别:
+        <select name="gender" class="gender">
+            <option>男</option>
+            <option>女</option>
+        </select>
+        薪资:
+        <input type="text" class="salary" name="salary">
+        就业城市:
+        <select name="city" class="city">
+            <option>山东</option>
+            <option>北京</option>
+            <option>四川</option>
+            <option>陕西</option>
+        </select>
+        <button class="add">录入</button>
+    </form>
+    <div class="title">
+        <span>共有数据 <b>0</b> 条</span>
+    </div>
+    <table>
+        <thead>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>薪资</th>
+            <th>就业城市</th>
+            <th>录入时间</th>
+            <th>操作</th>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <script>
+        // 参考数据
+        const initData = [
+            {
+                stuId: 1,
+                uname: '.hh',
+                age: 20,
+                gender: '女',
+                salary: '12000',
+                city: '四川',
+                time: '2023/5/9 20:17:00'
+            }
+        ]
+        // 不用重复存所有一次之后就注释 会覆盖以后的值
+        // localStorage.setItem('data', JSON.stringify(initData))
+        // 获取元素
+        const tbody = document.querySelector('tbody')
+        //1. 渲染
+        // 1.1读取本地存储的数据 
+        // 记住要转换成对象 如果没有数据 用空数组代替 
+        const arr = JSON.parse(localStorage.getItem('data')) || []
+        console.log(arr)
+        // 1.2利用map和join方法渲染页面
+        function render() {
+            // (1)利用map遍历数组，返回对应的tr的数组
+            const trArr = arr.map(function (ele, index) {
+                return `
+                    <tr>
+                        <td>${ele.stuId}</td>
+                        <td>${ele.uname}</td>
+                        <td>${ele.age}</td>
+                        <td>${ele.gender}</td>
+                        <td>${ele.salary}</td>
+                        <td>${ele.city}</td>
+                        <td>${ele.time}</td>
+                        <td>
+                            <a href="javaspcript:" data-id="${index}">
+                                删除
+                            </a>
+                        </td>
+                    </tr>
+                `
+            })
+
+            // (2)把数组转换成字符串 join
+            // (3)把生成的字符串追加给tbody
+            console.log(trArr)
+            tbody.innerHTML = trArr.join('')
+            const b = document.querySelector('b')
+            b.innerHTML = arr.length
+        }
+        render()
+
+        //2. 新增
+        const info = document.querySelector('.info')
+        const uname = document.querySelector('.uname')
+        const age = document.querySelector('.age')
+        const gender = document.querySelector('.gender')
+        const salary = document.querySelector('.salary')
+        const city = document.querySelector('.city')
+        info.addEventListener('submit', function (e) {
+            // 阻住默认行为
+            e.preventDefault()
+            // 非空判断
+            if (!uname.value || !age.value || !gender.value || !salary.value || !city.value) {
+                return alert('输入不能为空')
+            }
+            // 给arr数组追加对象 存储表单获取的数据
+            arr.push(
+                {
+                    stuId: arr.length ? arr[arr.length - 1].stuId + 1 : 1,// 防止删除一条数据时序号与预期不一样
+                    uname: uname.value,
+                    age: age.value,
+                    gender: gender.value,
+                    salary: salary.value,
+                    city: city.value,
+                    time: new Date().toLocaleString()
+                }
+            )
+            // 渲染页面
+            render()
+            // 重置表单
+            this.reset()
+            // 把数组存入本地存储 一定要转换成JSON字符串 刷新后不消失
+            localStorage.setItem('data', JSON.stringify(arr))
+        })
+        //3. 删除
+        tbody.addEventListener('click', function (e) {
+            // 判断是否点击的是删除按钮
+            if (e.target.tagName === 'A') {
+                // 确认是否删除 confirm返回true或false
+                if (confirm('您确定要删除这条数据吗？')) {
+                    // 得到当前点击链接的索引号 渲染数据时动态给a链接添加自定义属性例如 data-id=0   
+                    arr.splice(e.target.dataset.id, 1)
+                    // 重新渲染页面
+                    render()
+                    // 把最新的arr数组存入本地
+                    localStorage.setItem('data', JSON.stringify(arr))
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

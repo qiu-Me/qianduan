@@ -1,0 +1,11 @@
+1.dispaly 元素隐藏并且不在占有原来位置
+dispaly:none（重点） 
+dispaly:block 除了转换成块级元素外还有显示元素的意思
+2.visbility 元素隐藏但继续占有原来位置
+visible 元素可视
+hidden 
+3.overflow 溢出 有定位的盒子慎用 因为我们故意设置了隐藏部分
+visible 溢出部分显示
+hidden 溢出部分隐藏
+scroll 溢出部分显示滚动条 不溢出也显示
+auto   溢出时才显示滚动条 不溢出不显示

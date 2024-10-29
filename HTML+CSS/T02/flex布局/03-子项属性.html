@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        section {
+            display: flex;
+            width: 60%;
+            height: 150px;
+            background-color: pink;
+            margin: 0 auto;
+        }
+
+        section div:nth-child(1) {
+            width: 100px;
+            height: 150px;
+            background-color: red;
+        }
+
+        section div:nth-child(2) {
+            /* 分配剩余空间 1份*/
+            flex: 1;
+            background-color: skyblue;
+        }
+
+        section div:nth-child(3) {
+            width: 100px;
+            height: 150px;
+            background-color: green;
+        }
+
+
+        p {
+            display: flex;
+            width: 60%;
+            height: 150px;
+            background-color: pink;
+            margin: 10px auto;
+        }
+
+        p span {
+            flex: 1;
+        }
+        
+        p span:nth-child(2) {
+            /* 平均分成4份 占2份 */
+            flex: 2;
+            background-color: skyblue;
+
+            /* order把盒子放在相对于自己位置（0）的地方 默认是0 */
+            /* 放在1号span前面 */
+            order: -1;
+        }
+
+        p span:nth-child(3) {
+            height: 75px;
+            /* 控制子项在侧轴上的排序方式 可以覆盖align-item*/
+            align-self: flex-end;
+
+            background-color: brown;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div></div>
+        <div></div>
+        <div></div>
+    </section>
+    <p>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </p>
+</body>
+
+</html>

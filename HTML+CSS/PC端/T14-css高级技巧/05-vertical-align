@@ -1,0 +1,3 @@
+用于设置一个元素的垂直对齐方式，但只针对行内元素或者行内块元素有效 比如图片+文字默认是基线对齐 display: online-block;
+vertical-align: middle/top/bottom/baseline;
+可以解决盒子里面的图片与盒子有空白的问题，因为默认是基线对齐

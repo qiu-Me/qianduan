@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本属性</title>
+    <style>
+        div {
+            /* color: red; */
+            /* color: #ffff00;  十六进制*/  
+            color: rgb(255,0,0);
+        }        
+
+        h1 {
+            /* 本质上是让h1盒子里的文字 水平 居中对齐 */
+            text-align: center;/*left right */
+        }
+
+        .s {
+            /* 添加下划线 */
+            text-decoration: underline;
+        }
+        a {
+            /* 取消下划线 */
+            text-decoration: none;
+        }
+
+        p {
+            font-size: 24px;
+            /* 文本的第一行缩进 多少距离 */
+            /* text-indent: 20px; */
+            /* 如果写了2em 则是缩进当前元素的2个文字大小的距离 em本质上是一个文字大小的单位 */
+            text-indent: 2em;
+            line-height: 48px;
+        }
+
+        .h {
+            font-size: 25px;
+            /* 行间距=上间距+文字大小+下间距 */
+            line-height: 50px;
+        }
+    </style>
+
+</head>
+<body>
+    <div>这是一个颜色嘿嘿</div>
+
+    <h1>这是一个对齐</h1>
+
+    <div class="s">粉红色的回忆：文本外观的装饰文本</div>
+    <a href="#">链接下有横线，我要删除</a>
+
+    <div class="h">中国人</div>
+
+    <p>订单显示发货了，但快递信息为什么还没有更新？您在聚美订单页面看到的物流查询信息由快递公司传递提供。由于快递公司信息更新会有一定延迟，请您多多谅解。（延迟时间可能从1天到3天不等，EMS快递的物流配送信息可能最多可能有1周左右延迟）</p>
+    <p>名品折扣产品显示发货了，但是为什么没有快递信息？为什么有时联系快递，快递称没有这个订单？由于名品折扣产品由品牌商负责发货，品牌商选择的部分快递公司不能及时提供快递物流信息，请您耐心等候。除非地域偏远，最晚七日内您应该可以收到货品。</p>
+   
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //forEach 就是遍历 加强版的for循环  没有返回值 适合遍历数组对象 map有返回值适合修改数组内容 返回修改后数组
+        const arr = ['red', 'blue', 'pink']
+        //   被遍历数组.forEach(function(当前数组元素,当前元素索引号){})
+        // 索引号可以不写  
+        arr.forEach((item, index) => {
+            console.log(item)
+            console.log(index)
+        });
+
+        // 判断map是否只能加字符串 不是 可以进行运算
+        const arr2 = [1, 2, 3]
+        const newArr2 = arr2.map(item => {
+            return item + 10
+        })
+        // 等于
+        // const newArr2 = arr2.map(item => item + 10)
+        console.log(newArr2)  // newArr2 = [11,12,13]
+    </script>
+
+
+</body>
+
+</html>

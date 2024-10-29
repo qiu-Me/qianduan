@@ -1,0 +1,54 @@
+less是css的扩展语言 扩展了css的动态特性 是一门css预处理语言
+
+变量:
+    定义：
+        @变量名: 属性;
+        比如
+        @color: pink;
+        使用
+        div {
+            color: @color;
+        }
+
+编译
+
+嵌套 
+    1.
+    less文件
+    div {
+        width: 100px;
+        a {
+            color: pink;
+        }
+    }
+    编译生成css文件
+    div {
+        width: 100px;
+    }
+    .div a {
+        color: pink;
+    }
+    2.伪类 交集选择器 内层都需要加&
+    less文件
+    div {
+        width: 100px;
+        &:hover {
+            color:pink;
+        }
+    }
+    css文件
+    div {
+        width: 100px;
+    }
+    div:hover {
+        color: pink;
+    }
+
+运算 
+    实现加减乘除(/)
+    运算符左右两侧必须加空格 
+    两个参数与运算 如果有一个数有单位 则最后单位以这个单位为准
+    两个参数与运算 如果两个都有单位 则以第一个单位为准
+    @border: 5px + 5;
+    width: 80 + 50px;
+    background-color: #666 - #222;//#444444 渲染

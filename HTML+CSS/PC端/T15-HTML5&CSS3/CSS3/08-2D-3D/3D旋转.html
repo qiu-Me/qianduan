@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D旋转</title>
+    <style>
+        body {
+            perspective: 400px;
+        }
+
+        img {
+            display: block;
+            margin: 100px auto;
+
+            width: 400px;
+
+            /* 过渡 */
+            transition: all 1s;
+
+        }
+
+        img:hover {
+            /* transform: rotateX(45deg); */
+            /* transform: rotateY(180deg); */
+            /* transform: rotateZ(180deg); */
+            /* transform: rotate3d(x,y,x,180deg); */
+            /* transform: rotate3d(0, 1, 0, 180deg); */
+            /* 矢量方向 x y的对角线 */
+            transform: rotate3d(1, 1, 0, 180deg);
+        }
+    </style>
+</head>
+
+<body>
+    <img src="mmexport5c9339dc6b644462ee45ddd34ed89fb2_1636622.webp" alt="">
+</body>
+
+</html>

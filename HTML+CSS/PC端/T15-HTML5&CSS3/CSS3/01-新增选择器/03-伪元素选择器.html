@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+
+        /*    
+        before 和 after创建一个元素属于行内元素不能直接设置大小
+        新创建的元素在文档树中找不到 所有叫伪元素
+        语法: div::after {}
+        before 和 after 必须要有content（内容）属性 否则无效
+        before实在父元素内容前面创建元素 after是在内容后面
+        伪类选择器和便签选择器一样权重为1
+    */
+        div::before {
+            content: '我';
+        }
+
+        div::after {
+            content: '.hh';
+        }
+    </style>
+</head>
+
+<body>
+    <div>是</div>
+</body>
+
+</html>

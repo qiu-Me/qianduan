@@ -1,0 +1,19 @@
+em是相对于盒子的父元素的字体大小而言的
+div {
+    font-size: 12px;
+}
+p {
+    // width = 24px;
+    width: 2em;
+}
+
+rem是相对于html来说的 一个文件里面的只有一个html文件
+
+html {
+    font-size: 12px;
+}
+
+div {
+    // width = 24px;
+    width: 2rem;
+}

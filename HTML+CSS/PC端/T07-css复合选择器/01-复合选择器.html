@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /* 后代选择器 元素1 元素2 { } ，元素2是元素1的后代，可以是儿子也可以是孙子，是后代就行 元素1和元素2是基础选择器 */
+        ol li {
+            color: pink;
+        }
+        ul li a {
+            color: blue;
+        }
+        .one li a {
+            color: red;
+        }
+
+        /* 子选择器 元素1>元素2{  } ，元素2必须是元素1的亲儿子*/
+        div>a {
+            color: green;
+        }
+
+        /* 并集选择器 */
+        /* 把熊大熊二改成相同颜色
+        .two,
+        p {
+            color: brown;
+        } */
+        /* 把熊大熊二猪猪都改成相同颜色 */
+        .two,
+        p,
+        .pig li {
+            color: blueviolet;
+        }
+
+    </style>
+
+</head>
+<body>
+    <ol>
+        <li>哈喽，我是ol的孩子</li>
+        <li>哈喽，我是ol的孩子</li>
+        <li>哈喽，我是ol的孩子</li>
+    </ol>
+    <ul>
+        <li>嘿嘿</li>
+        <li>嘿嘿</li>
+        <li><a href="#">嘿嘿</a></li>
+    </ul>
+    <ul class="one">
+        <li>嘿嘿</li>
+        <li>嘿嘿</li>
+        <li><a href="#">嘿嘿</a></li>
+    </ul>
+
+    <div>
+        <a href="#">我是儿子</a>
+        <p>
+            <a href="#">我是孙子</a>
+        </p>
+    </div>
+
+    <div class="two">熊大</div>
+    <p>熊二</p>
+    <span>光头强</span>
+    <ul class="pig">
+        <li>佩奇</li>
+        <li>乔治</li>
+        <li>猪妈妈</li>
+    </ul>
+
+</body>
+</html>

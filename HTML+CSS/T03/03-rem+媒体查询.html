@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @media screen and (min-width: 320px) {
+            html {
+                font-size: 50ppx;
+            }
+        }
+
+        @media screen and (min-width: 640px) {
+            html {
+                font-size: 100px;
+            }
+        }
+
+        .top {
+            height: 1erm;
+            font-size: 0.5rem;
+            background-color: green;
+            color: #fff;
+        }
+    </style>
+
+    <!-- 引入资源 就是针对不同的屏幕尺寸调用不同的css文件  -->
+    <!-- css文件自己写 属性 -->
+    <link rel="stylesheet" href="style320.css" media="screen and (min-width: 320px)">
+    <link rel="stylesheet" href="style640.css" media="screen and (min-width: 640px)">
+</head>
+
+<body>
+    <div class="top">购物车</div>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 伪类选择器 */
+        /*
+        重要；nth-child(n)
+        n可以是数字(1,2,3...) 也可以是关键字(even偶数/odd奇数) 还可以是 公式（2n（偶数）,2n+1（奇数）,5n（5的倍数）,n+5（以5开始顺序）,-n+5（以5开始倒序）
+        
+        nth-child 与 nth-of-type 的区别：
+
+        nth-child对父元素的所有孩子编号排序，先找到第n个孩子再看类型是否匹配，比如：
+        <section>
+            <p>第一</p>
+            <div>第二</div>
+            <div>第三</div>
+        </section>
+        
+        section div :nth-child(1) {
+            backgrouned-color: blue;
+        }
+        它会先选择第一个孩子 p标签 然后去看是否是div标签 结果不是，所以程序不执行
+        而
+        nth-of-type对父元素的指定元素盒子排序编号，比如上面的例子变成：
+        section div :nth-of-type(1) {  
+            background-color: blue;
+        }    
+        则第一个div盒子内容为 第二 变色，它是先去看盒子类型再看后面的，程序执行。
+        
+        */
+
+        li {
+            list-style: none;
+        }
+
+        /* 1.选择第一个孩子和最后一个孩子 */
+        ul li:first-child {
+            background-color: pink;
+        }
+
+        /* 2.选择最后一个孩子 */
+        ul li:last-child {
+            background-color: pink;
+        }
+
+        /* 3.选择第n个孩子 */
+        ul li:nth-child(5) {
+            background-color: skyblue;
+        }
+
+        ul li:nth-child(2) {
+            background-color: skyblue;
+        }
+        
+
+        /* 关键字 */
+        div ol li:nth-child(even) {
+            background-color: orange;
+        }
+
+        div ol li:nth-child(odd) {
+            background-color: #ccc;
+        }
+
+        /* 公式：()里面只能是n，其他字母没用 从0开始 每次加1 往后面计算 一直最后 */
+        span {
+            display: inline-block;
+            margin-top: 100px;
+            width: 100%;
+        }
+
+        /* 开始 */
+        span ol li:nth-child(n) {
+            background-color: aqua;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- 伪类选择器 -->
+    <ul>
+        <li>我是第1个孩子</li>
+        <li>我是第2个孩子</li>
+        <li>我是第3个孩子</li>
+        <li>我是第4个孩子</li>
+        <li>我是第5个孩子</li>
+        <li>我是第6个孩子</li>
+        <li>我是第7个孩子</li>
+        <li>我是第8个孩子</li>
+    </ul>
+
+    <!-- nth-child -->
+    <div class="" style="margin-top: 100px;">
+        <ol>
+            <li>我是第1个孩子</li>
+            <li>我是第2个孩子</li>
+            <li>我是第3个孩子</li>
+            <li>我是第4个孩子</li>
+            <li>我是第5个孩子</li>
+            <li>我是第6个孩子</li>
+            <li>我是第7个孩子</li>
+            <li>我是第8个孩子</li>
+        </ol>
+    </div>
+    <span>
+        <ol>
+            <li>我是第1个孩子</li>
+            <li>我是第2个孩子</li>
+            <li>我是第3个孩子</li>
+            <li>我是第4个孩子</li>
+            <li>我是第5个孩子</li>
+            <li>我是第6个孩子</li>
+            <li>我是第7个孩子</li>
+            <li>我是第8个孩子</li>
+        </ol>
+    </span>
+</body>
+
+</html>

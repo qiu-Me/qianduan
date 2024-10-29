@@ -1,0 +1,19 @@
+
+在后面添加伪元素
+.clearfix::after {  //也可以写成.clearfix:after 照顾低版本浏览器 
+    conment: '';//伪元素必须写的
+    display: block;//插入元素必须是块级
+    height: 0;//不要看见这个元素
+    clear: both;//核心代码清除
+    visibility: hidden;//不要看见这个元素
+}
+在前面和后面添加伪元素更加牢固
+.clearfix::after,.clearfix::before {
+    conment: '';
+    display: table;//伪元素在一行
+}
+.clearfix::after {
+    clear: both;
+}
+
+

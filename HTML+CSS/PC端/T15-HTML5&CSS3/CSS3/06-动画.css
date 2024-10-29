@@ -1,0 +1,121 @@
+/* 动画 */
+/* 1.定义动画 from to 等价于 0% 100%*/
+@keyframes move {
+
+    /* 开始状态 */
+    0% {
+        transform: translateX(0px);
+    }
+
+    /* 结束状态 */
+    100% {
+        transform: translateX(1000px);
+    }
+}
+
+div {
+    width: 200px;
+    height: 200px;
+    background-color: pink;
+    /* 2.调用动画 */
+    /* 动画名称 */
+    animation-name: move;
+    /* 持续时间 */
+    animation-duration: 2s;
+}
+
+/* 动画序列 */
+/* 1.可以做多个状态的变化 kryframes 关键帧 */
+/* 2.里面百分比要是整数 */
+/* 3.里面百分比就是 总的时间(我们案例是10秒) 的划分 25% * 10 = 2.5s 经过了第一个阶段*/
+@keyframes move {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(1000px, 0);
+    }
+
+    50% {
+        transform: translate(1000px, 500px);
+    }
+
+    75% {
+        transform: translate(0, 500px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+div {
+    width: 200px;
+    height: 200px;
+    background-color: pink;
+    /* 2.调用动画 */
+    /* 动画名称 */
+    animation-name: move;
+    /* 持续时间 */
+    animation-duration: 10s;
+}
+
+/* 动画属性 */
+div {
+    width: 200px;
+    height: 200px;
+    background-color: pink;
+
+    /* 动画名称 */
+    animation-name: move;
+    /* 持续时间 */
+    animation-duration: 2s;
+    /* 运动时间 */
+    animation-timing-function: ease;
+    /* 何时开始 */
+    animation-delay: 1s;
+    /* 重复次数 iteration 重复的 conut 次数 infinite 无限*/
+    /* animation-iteration-count: infinite; */
+    /* 是否反方向播放 默认是 normal 如果想就写 alternate */
+    /* animation-direction: alternate; */
+    /* 动画结束后的状态 默认是 backwards 回到起始状态 可以让他停留在结束状态 forwards */
+    animation-fill-mode: forwards;
+
+    /* 简写 */
+    /* animation: 动画名称 持续时间 运动曲线(匀速) 何时开始 播放次数 是否方向 动画起始或者结束状态; */
+    /* 前两个一定要写 */
+    /* animation: move 2s linear 0s 1 alternate forwards; */
+}
+
+div:hover {
+    /* 当鼠标一经过div 就让这个div停止动画 鼠标离开就继续动画 */
+    /* 这个必须要单写 */
+    animation-play-state: paused;
+}
+
+/* 速度曲线： */
+/* <div>
+    我在世纪佳缘等着你们
+</div> */
+div {
+    overflow: hidden;
+    font-size: 20px;
+    width: 0;
+    height: 30px;
+    background-color: pink;
+    /* 让文字强制一行显示 */
+    white-space: nowrap;
+    /* steps就是分几步完成 有了steps就不要写ease或者linear forwards停留在结束位置 */
+    animation: w 4s steps(10) forwards;
+}
+
+@keyframes w {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 200px;
+    }
+}

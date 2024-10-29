@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 100%;
+            height: 50px;
+        }
+
+        .box .list {
+            display: flex;
+            width: 100%;
+            height: 50px;
+            background-color: pink;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        a {
+            display: block;
+            flex: 1;
+            text-decoration: none;
+            color: #fff;
+            width: 100%;
+        }
+
+        .line {
+            margin-top: 10px;
+            width: 20%;
+            height: 5px;
+            background-color: pink;
+            transition: all .3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="list">
+            <a href="#">音乐</a>
+            <a href="#">音乐</a>
+            <a href="#">音乐</a>
+            <a href="#">音乐</a>
+            <a href="#">音乐</a>
+        </div>
+        <div class="line"></div>
+    </div>
+
+
+    <script>
+        const list = document.querySelector('.box .list')
+        const line = document.querySelector('.line')
+        //给链接a元素的父亲添加事件委托 
+        list.addEventListener('click', function (e) {
+            // 让委托事件里面的a标签移动元素位置
+            if (e.target.tagName === 'A') {
+                line.style.transform = `translateX(${e.target.offsetLeft}px)`
+            }
+
+        })
+    </script>
+</body>
+
+</html>

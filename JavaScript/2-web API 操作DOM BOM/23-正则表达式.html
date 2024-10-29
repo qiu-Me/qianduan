@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            display: inline-block;
+            width: 250px;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 20px;
+            font-size: 12px;
+        }
+
+
+
+        .error {
+            color: red;
+            background: url(./images/error.jfif) no-repeat left center;
+            background-size: 20px;
+        }
+
+        .right {
+            color: green;
+            background: url(./images/right.jfif) no-repeat left center;
+            background-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text"><span></span>
+
+    <script>
+        // 获取元素
+        const input = document.querySelector('input')
+        // input的下一个兄弟就是span
+        const span = input.nextElementSibling
+        // 定义正则表达式
+        const reg = /^[a-zA-Z0-9-_]{6,16}$/
+        // 添加事件 失去焦点
+        input.addEventListener('blur', function () {
+            // console.log(reg.test(this.value))
+            if (reg.test(this.value)) {
+                span.innerHTML = '输入正确'
+                // 不用span.classList.add('right') 因为不会覆盖
+                span.className = 'right'
+
+            }
+            else {
+                span.innerHTML = '输入为字母、数字、下划线或短横线组成'
+                span.className = 'error'
+            }
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+1.鼠标样式
+cursor: default 默认  
+        pointer 小手
+        move 移动
+        text 文本
+        not-allowed 禁止
+2.轮廓线
+outline: none 取消 文本框默认的蓝色边框
+resize: none 文本域取消放大的功能

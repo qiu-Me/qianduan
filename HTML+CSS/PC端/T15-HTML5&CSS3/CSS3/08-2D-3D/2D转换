@@ -1,0 +1,56 @@
+transform
+    translate
+        移动盒子的位置:定位 盒子外边距 2d转换移动
+        用法：
+        transform: translate(x,y);
+        1.只要x移动
+        transform: translate(100px,0);
+        transform: translateX(100px);
+        2.只要y移动
+        transform: translate(0,100px);
+        transform: translateY(100px);
+        优点：不会影响其他盒子的位置
+        缺点：translate对行内标签无效(span)
+        1.translate括号里面50%是相对于盒子自身的宽度的50%
+        transform: translate(50%)
+    rotate 2D旋转
+        用法：
+        顺时针旋转45度 逆时针就是负值
+        rotate(45deg);
+        ps：过渡 transition: all 0.3s;
+
+        案例：
+        2d.css
+    transform-origin: x y;  以什么位置做旋转
+    1.可以跟方位词
+    transform-origin: left bottom;
+    2.默认是50% 50% 等价于 center center
+    3.可以是像素 px px
+
+    scale 2D转换缩放  逗号隔开值
+        1.里面写数字不跟单位 就是倍数的意思 1就是1倍 2就是2倍
+        transform: scale(x,y);
+        transform: scale(2,2);
+
+        2.修改了宽度是原来的2倍 高度 不变
+        transform: scale(2,1);
+
+        3.等比例缩放 同时修改宽度和高度 简单的方法 
+        以下是宽度修改了两倍 高度是默认的和第一个参数一样
+        transform: scale(2);
+
+        4.缩小 小于1就是缩小
+        transform: scale(0.5);
+
+        优点：不会影响其他盒子的位置 而且可以设置缩放的中心点
+
+    
+
+
+
+
+
+
+    
+
+

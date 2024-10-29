@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            margin: 100px auto;
+            /*box-shadow顺序含义：
+            h-shadow 必需，水平阴影 可以为负
+            v-shadow 必需，垂直阴影 可以为负
+            blur 可选 模糊距离
+            spread 可选 阴影的尺寸
+            color 可选 阴影的颜色（可用rgba）
+             可选 将外部阴影（outset）改成内部阴影 */
+
+            /* box-shadow: h-shadow v-shadow blur spread color inset; */
+            /* box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3); */
+
+            /* 可以在后面写上inset 阴影变成内部的 但不能写outset 因为默认为这个 写了就不生效了 */
+        }
+
+        /* 原先没有影子 鼠标经过有 */
+        div:hover {
+            box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+    </div>
+
+</body>
+
+</html>

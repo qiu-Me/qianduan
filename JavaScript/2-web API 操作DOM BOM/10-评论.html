@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            margin-top: 100px;
+            min-width: 400px;
+            max-width: 800px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .wrapper textarea {
+            outline: none;
+            border-color: transparent;
+            resize: none;
+            background: #f5f5f5;
+            border-radius: 4px;
+            flex: 1;
+            padding: 10px;
+            transition: all .5s;
+            height: 30px;
+        }
+
+        /* 点击焦点后 */
+        .wrapper textarea:focus {
+            border-color: #e4e4e4;
+            background: #fff;
+            height: 50px;
+        }
+
+        .wrapper button {
+            background: #00aeec;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            margin-left: 10px;
+            width: 70px;
+            cursor: pointer;
+        }
+
+        .wrapper .total {
+            margin-right: 80px;
+            color: #999;
+            margin-top: 5px;
+            /* 透明 */
+            opacity: 0;
+            transition: all .5s;
+        }
+
+        .list {
+            min-width: 400px;
+            max-width: 800px;
+            display: flex;
+        }
+
+        .list .item {
+            width: 100%;
+            display: flex;
+        }
+
+        .list .item .name {
+            color: #FB7299;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .list .item .text {
+            color: #333;
+            padding: 10px 0;
+        }
+
+        .list .item .time {
+            color: #999;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <textarea name="" id="tx" rows="2" placeholder="发一条评论" maxlength="200"></textarea>
+        <button>发布</button>
+    </div>
+    <div class="wrapper" style="margin-top: 10px;">
+        <span class="total">0/200字</span>
+    </div>
+
+    <div class="list">
+        <div class="item" style="display: none;">
+            <i class="avater"></i>
+            <div class="info">
+                <p class="name">清风徐来</p>
+                <p class="text">大家辛苦</p>
+                <p class="time">2023-4-25 18:22</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //当获得焦点就让total显示出来
+        const textarea = document.querySelector('#tx')
+        const total = document.querySelector('.total')
+        textarea.addEventListener('focus', function () {
+            total.style.opacity = 1
+        })
+        //文本域失去焦点 就隐藏total
+        textarea.addEventListener('blur', function () {
+            total.style.opacity = 0
+        })
+        //检测用户 输入文字自动变数字
+        textarea.addEventListener('input', function () {
+            //textearea.value.length是文本域的字符长度
+            total.innerHTML = `${textarea.value.length}/200字`
+        })
+
+        //鼠标按下Enter键显示发布内容
+        const item = document.querySelector('.item')
+        const text = document.querySelector('.text')
+        textarea.addEventListener('keyup', function (e) {
+            //按下回车键触发 一定别忘了.key 还要引号
+            if (e.key === 'Enter') {
+                //str.trim() 清除字符串两端的空格 之后得到的字符串不为空
+                if (textarea.value.trim() !== '') {
+                    //block要有引号
+                    item.style.display = 'block'
+                    text.innerHTML = textarea.value
+                }
+                //按下Enter清空文本域 和total
+                textarea.value = ''
+                total.innerHTML = '0/200字'
+            }
+        })
+    </script>
+</body>
+
+</html>

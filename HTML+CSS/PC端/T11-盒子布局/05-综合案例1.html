@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .box {
+            width: 298px;
+            height: 415px;
+            background-color: #fff;
+            /* 让盒子水平居中对齐 */
+            margin: 100px auto;
+        }
+
+        .box img {
+            /* 图片宽度和父亲一样宽 */
+            width: 100%;
+        }
+
+        .review {
+            height: 70px;
+            font-size: 14px;
+            /* 因为段落没有width属性 所以padding 不会撑大盒子宽度 */
+            padding: 0 28px;
+            margin-top: 30px;
+        }
+
+        .appraise {
+            font-size: 12px;
+            color: #b0b0b0;
+            margin-top: 20px;
+            padding: 0 28px;
+        }
+
+        .info {
+            font-size: 14px;
+            margin-top: 15px;
+            padding: 0 28px;
+        }
+
+        .info h4 {
+            display: inline-block;
+            font-weight: 400;
+        }
+
+        .info em {
+            font-style: normal;
+            color: #ebe4e0;
+            margin: 0 6px 0 15px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="box">
+        <a href="#"><img src="011b377d62c0f7594f277c3dd6c7fe3b.jpeg"></a>
+        <p class="review"><a href="#">好曲奇我只选黑奥利，快递送到家</a></p>
+        <div class="appraise">来自564864877的评价</div>
+        <div class="info">
+            <h4><a href="#">真黑曲奇，我只要这个...</a></h4>
+            <em>|</em>
+            <span style="color: orange;">9.9元</span>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

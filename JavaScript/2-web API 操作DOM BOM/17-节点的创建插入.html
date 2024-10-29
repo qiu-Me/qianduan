@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    li {
+        width: 100px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        color: #ccc;
+    }
+</style>
+
+<body>
+    <ul>
+    </ul>
+    <script>
+        let data = ['red', 'blue', 'skyblue', 'orange', 'brown']
+        const ul = document.querySelector('ul')
+        // 根据小li个数创建对应li
+        for (let i = 0; i < data.length; i++) {
+            // 创建新的小li
+            const li = document.createElement('li')
+            // innerHTML可以解析标签 里面内容就是li里面的所有内容
+            li.innerHTML = `我是新加的${i + 1}`
+            li.style.backgroundColor = data[i]
+            // 追加li
+            ul.appendChild(li)
+        }
+
+    </script>
+</body>
+
+</html>

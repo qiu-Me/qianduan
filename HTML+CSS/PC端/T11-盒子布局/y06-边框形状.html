@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 300px;
+            height: 100px;
+            background-color: pink;
+            /* 圆角边框 */
+            border-radius: 10px;
+            /* 圆角矩形设置为高度的一半 */
+            border-radius: 50px;
+        }
+
+        .box {
+            width: 300px;
+            height: 300px;
+            /* 画园 把半径设置为高度宽度的一半 */
+            /* border-radius: 150px; */
+            /* 50%就是高度 宽度的一半 */
+            border-radius: 50%;
+        }
+
+        .radius {
+            width: 200px;
+            height: 200px;
+            /* border-radius: 上左 上右 下右 下左; */
+            border-radius: 15px 20px 25px 30px;
+            /* 还可以是两个值 对角线的关系  */
+            /* border-radius: 10px 40px; */
+            /* 左上角 不能改变顺序必须top-left 不能left-top */
+            /* border-top-left-radius: 20px ; */
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <div></div>
+    <div class="box"></div>
+    <div class="radius"></div>
+</body>
+
+</html>

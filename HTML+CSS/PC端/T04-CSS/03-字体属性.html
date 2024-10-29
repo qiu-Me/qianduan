@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字体属性</title>
+    <style>
+        h1 {
+            font-family: '楷书','Microsoft yahei';
+            font-weight: 400;/*不加粗*/
+        }
+        /* 标题标签比较特殊，需要单独指出大小 */
+        body {
+            font-size: 20px; /*字体大小*/
+
+        }
+
+        .bold {
+            /* font-weight: bold;  */
+            /* 这个700的后面不跟单位 等价于 bold 都是加粗的效果 */
+            font-weight: 700;
+        }
+        .ziti {
+            font-style: italic; /*倾斜*/
+        }
+
+        .noqinxie {
+            font-style: normal; /*让倾斜的字体不倾斜*/
+        }
+
+        /* 复合属性 */
+        div {
+            /* 
+            font-style: italic;
+            font-weight: 700;
+            font-size: 16px;
+            font-family: 'Microsoft yahei'; 微软雅黑 
+            */
+
+            /* 复合属性：简写方式  必须这种格式不能随便交换位置 必须保留 font-size font-family，其他可以省略*/
+            /* font: font-style font-weight font-size/line-height font-family */
+
+            /* font: italic 700 16px Microsoft yahei; */
+            font: 20px '楷体';
+        }
+
+    </style>
+</head>
+<body>
+    <h1>帮助中心</h1>
+    
+
+    <p>使用帮助</p>
+
+    <p>账户相关</p>
+
+    <p class="bold">支付相关</p>
+
+    <p class="ziti">配送相关</p>
+    <br>
+    <em class="noqinxie">售后服务</em> <!--em,i 倾斜-->
+
+    <div>聚美手机版</div> 
+</body>
+</html>

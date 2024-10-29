@@ -1,0 +1,42 @@
+1.清除浮动的本质是清除浮动元素脱离标准流照成的影响
+	注意：原先浮动所设置的特性不会改变 浮动还是浮动 清除浮动是改变的盒子外的受影响的元素的位置，而不是删除盒子内的浮动特性
+2.清除浮动策略是 闭合浮动 只让浮动在父盒子内部影响，不影响父盒子外面的其他盒子
+3.方法
+3.1 额外标签法（不常用）
+用法 在最后一个子盒子后面添加 一个盒子属性clear:both
+div {
+    clear:both
+}
+新增的盒子要求必须是块级元素不是行内元素
+3.2 清除浮动-父级添加 overflow
+在父盒子里面添加属性为 overflow：hidden(最常用)/auto/scroll
+缺点：无法显示溢出部分盒子
+3.3 清除浮动-after 伪元素法 父级
+也是针对于父盒子而言
+在style里面写
+.clearfix:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+/*兼顾低版本浏览器*/
+.clearfix {
+    *zoom: 1;
+}
+在body里面：
+<div class="clearfix">...</div>
+3.4 清除浮动-双伪元素清除浮动 父级
+用法和3.3差不多 也是在父盒子里面
+.clearfix:before,
+.clearfix:after{
+    content: ""
+    diaplay: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
+}

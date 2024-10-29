@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- viewport视口 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,initial-scale=1.0,maximum-scale=1.0,
+    minimum-scale=1.0,user-scalable=no">
+
+    <title>Document</title>
+
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+
+            background: url(图片1.png) no-repeat;
+
+            /* background-size: x y;拉伸背景 */
+            /* 1.只写一个参数 肯定是宽度 高度省略了 会等比例缩放 */
+            background-size: 50px;
+            /* 2.里面单位可以跟% 相当于父盒子而言 */
+            background-size: 50%;
+            /* 3.cover等比例拉伸 完全覆盖div盒子 可能有部分背景图片显示不全 */
+            background-size: cover;
+            /* 4.contain 高度和宽度等比例拉伸 但宽度或者高度 铺满整个div盒子就不再进行拉伸 可能有空白区域 */
+            background-size: contain;
+        }
+    </style>
+</head>
+
+<body>
+    啦啦啦啦啦啦
+    <div></div>
+</body>
+
+</html>

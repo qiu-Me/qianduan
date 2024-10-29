@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*         
+        浮动特性（重点）：
+        一、脱标
+        1.脱离标准流的控制（浮）移动到指定位置（动），（俗称脱标）
+        2.浮动的盒子不在保留原先的位置 :标准流盒子会补上原来浮动盒子的空位 会实现叠加效果，空间上的分隔 浮动会压在标准流上面
+        3.浮动盒子只影响后面的标准流不影响前面的
+        */
+        .box01 {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            float: left;
+        }
+
+        .box02 {
+            width: 200px;
+            height: 200px;
+            background-color: blanchedalmond;
+        }
+
+        /*
+        二、浮动元素一行显示
+        1.会随浏览器边框大小而改变相对位置
+        2.不管盒子大小都是左上角顶部对齐
+        注意：（1）浮动元素是相互贴靠在一起的（不会有缝隙），（2）如果父级宽度装不下这些浮动盒子，多出的盒子会另起一行
+        */
+        .box03 {
+            width: 200px;
+            height: 200px;
+            float: left;
+            background-color: aqua;
+            border: 1px solid black;
+        }
+
+        /*
+        三、
+        1.任何元素都可以浮动，不管是什么模式的元素，添加浮动之后具有行内块元素相似的特性
+        2.如果行内元素有了浮动，则不需要转换 块级\行内块 元素就可以直接设置高度宽度
+        附：如果块级盒子没有设置宽度，默认宽度和父级一样宽，但是添加浮动后，他的大小根据内容来决定
+        */
+        span {
+            float: right;
+            background-color: rgb(227, 143, 25);
+            border: 1px solid black;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="box01">我是浮动盒子</div>
+    <div class="box02">我是标准流盒子</div>
+
+    <div class="box03">1</div>
+    <div class="box03">2</div>
+    <div class="box03">3</div>
+    <div class="box03">4</div>
+
+    <span>1</span>
+    <span>2</span>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            margin: 100px auto;
+            width: 500px;
+            height: 500px;
+            background-color: aliceblue;
+            text-align: center;
+        }
+
+        strong {
+            display: inline-block;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <strong>年会抽奖</strong>
+        <h1>一等奖：<span id="one">???</span></h1>
+        <h2>二等奖：<span id="two">???</span></h2>
+        <h3>三等奖：<span id="three">???</span></h3>
+    </div>
+
+    <script>
+        const perrsonArr = ['小明', '小红', '小东', '小西', '大哈']
+        const box = document.querySelectorAll('.box span')
+        //记录数组长度 便于循环不会因为删除元素而出现异常
+        const length = box.length
+        for (let i = 0; i < length; i++) {
+            let n = Math.floor(Math.random() * perrsonArr.length)
+            box[i].innerHTML = perrsonArr[n]
+            //防止得奖者重名 
+            perrsonArr.splice(n, 1)
+            //检查是否出错
+            // console.log(perrsonArr.length)
+        }
+    </script>
+</body>
+
+</html>
